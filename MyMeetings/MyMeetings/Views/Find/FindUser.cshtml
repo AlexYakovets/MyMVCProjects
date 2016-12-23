@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MyMeetings.Models.ApplicationUser>
+<div id="searchresults">
+    <h3>All finded users:</h3>
+    <ul>
+        @foreach (var user in Model)
+        {
+            <li>@user.Email</li>
+        }
+    </ul>
+</div>
