@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using MyMeetings.Models;
+using Newtonsoft.Json;
 
 namespace MyMeetings.Controllers
 {
@@ -21,7 +22,7 @@ namespace MyMeetings.Controllers
         //}
         //POST: /Account/FindUser
         [HttpPost]
-        public ActionResult FindUser(string name)
+        public ActionResult FindUsers(string name)
         {
             IEnumerable < ApplicationUser > ListOfUsers= DBContext.Users;
             var users = ListOfUsers.Where(a => a.Email.Contains(name)).ToList();
@@ -30,6 +31,11 @@ namespace MyMeetings.Controllers
                 return HttpNotFound();
             }
             return PartialView(users);
+        }
+        public string Get()
+        {
+           return JsonConvert.SerializeObject(DBContext.Users);
+             
         }
     }
 }
