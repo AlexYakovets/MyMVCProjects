@@ -7,7 +7,6 @@
                 $("#userList").append("<li>"+elem["UserName"]+"</li>");
             });
             console.log(obj);
-           // alert(data);
         };
     }); 
 });

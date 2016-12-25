@@ -71,7 +71,6 @@ namespace MyMeetings.Models
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Дата Рождения")]
         public DateTime DateOfBirth { get; set; }
 

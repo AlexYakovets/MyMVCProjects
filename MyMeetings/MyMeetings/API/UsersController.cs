@@ -25,8 +25,9 @@ namespace MyMeetings.API
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post(RegisterViewModel user)
         {
+            
         }
 
         // PUT api/<controller>/5
