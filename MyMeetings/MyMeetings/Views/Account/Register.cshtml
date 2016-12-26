@@ -20,12 +20,14 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.DateOfBirth, new {@class = "col-md-2 control-label"})
-       <div class="col-md-10 ">
-            @Html.TextBoxFor(m => m.DateOfBirth, new {@class = "form-control"})
-            @*<p>Date: <input type="text" id="datepicker"></p>*@
-            <button type="button" class="test-ajax"></button>
-            <ul id="userList"></ul>
-        </div>
+        <div class="col-md-10 ">
+            <form data-formnovalidate>
+                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control" })
+            </form>
+                @*<p>Date: <input type="text" id="datepicker"></p>*@
+                <button type="button" class="test-ajax"></button>
+                <ul id="userList"></ul>
+</div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
