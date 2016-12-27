@@ -22,9 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
-#DateOfBirth {
-    width: 20%;
-}
 .text-error {
   color: #b22222;
+}
+.field-validation-error {
+    color: #f00;
+}
+ 
+.field-validation-valid {
+    display: none;
+}
+.validation-summary-valid {
+    display: none;
 }
