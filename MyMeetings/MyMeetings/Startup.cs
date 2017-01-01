@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin;
+using MyMeetings.Models;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(MyMeetings.Startup))]

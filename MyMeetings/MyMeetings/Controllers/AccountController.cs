@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyMeetings.Models;
@@ -393,13 +395,23 @@ namespace MyMeetings.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
+        public List<IdentityUserRole> GetRoleByUserId(string id)
+        {
+            ApplicationUser user = UserManager.FindById(id);
+            return user.Roles.ToList();
+        }
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        public ActionResult ShowUsers()
+        {
+            var result =  UserManager.Users;
+            return View(result);
         }
 
         protected override void Dispose(bool disposing)
