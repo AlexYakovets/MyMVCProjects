@@ -1,0 +1,23 @@
+﻿
+@model MyMeetings.Models.ApplicationUser
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Модель компьютера</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>Email пользователя:</dt>
+            <dd>@Html.DisplayFor(model => model.Email)</dd>
+            
+            <dt>Логин пользователя</dt>
+            <dd>@Html.DisplayFor(model => model.UserName)</dd>
+
+            <dt>Дата Рождения</dt>
+            <dd>@Html.DisplayFor(model => model.DateOfBirth)</dd>
+
+           
+        </dl>
+    </div>
+</div>

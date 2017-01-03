@@ -408,11 +408,7 @@ namespace MyMeetings.Controllers
             return View();
         }
 
-        public ActionResult ShowUsers()
-        {
-            var result =  UserManager.Users;
-            return View(result);
-        }
+     
 
         protected override void Dispose(bool disposing)
         {
