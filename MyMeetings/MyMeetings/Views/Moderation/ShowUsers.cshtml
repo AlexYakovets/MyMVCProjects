@@ -12,8 +12,8 @@
 <table class="table table-striped">
     <thead>
     <tr>
-    <th>Отметка</th>
-    <th>Логин</th>
+        <th>Отметка</th>
+        <th>Логин</th>
     </tr>
     </thead>
     @foreach (var m in Model)
@@ -25,11 +25,12 @@
             <td>
                 <p>@m.UserName </p>
             </td>
-           @*<td>
+            @*<td>
         <a href='@Url.Action("UserDetails", "Moderation", new {id = m.Id})'>
             <img src="~/Content/images/UserInfo.png" width="13" height="13" new class="userInfo"><img/>
         </a>
     </td>*@
+
             <td>
                 <a class="userInfo" href='@Url.Action("UserDetails", "Moderation", new {id = m.Id})'>
                     <img src="~/Content/images/UserInfo.png" width="18" height="18"><img/>
@@ -38,6 +39,10 @@
         </tr>
     }
 </table>
+<ul id="list-of-roles">
+
+</ul>
+<p><a class="btn btn-default btn-save">Save</a></p>
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
