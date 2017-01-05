@@ -33,5 +33,12 @@ namespace MyMeetings.Models
             public IdentityRole Role { get; set; }
             public bool IsAvaible  { get; set; }
         }
+
+        public class ChangeRole
+        {
+            public string RoleId { get; set; }
+            public string UserId { get; set; }
+            public bool IsAvaible { get; set; }
+        }
     }
 }

@@ -24,13 +24,13 @@ namespace MyMeetings.API
          
             List<RolesViewModels.UserRoles>returnData=new List<RolesViewModels.UserRoles>();
             IOwinContext context = new OwinContext();
-            ApplicationDbContext contextDB = ApplicationDbContext.Create();
+            ApplicationDbContext contextDb = ApplicationDbContext.Create();
 
             ApplicationUserManager manager =
                 new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             AccountController accountManager = new AccountController(manager,
                 new ApplicationSignInManager(manager, context.Authentication));
-            foreach (var r in contextDB.Roles)
+            foreach (var r in contextDb.Roles)
             {
                 RolesViewModels.UserRoles role=new RolesViewModels.UserRoles();
                 role.Role = r;
@@ -40,11 +40,22 @@ namespace MyMeetings.API
             List<IdentityUserRole> listOfRoles = accountManager.GetRoleByUserId(id);
             foreach (var l  in listOfRoles)
             {
-                var avaibleRole=contextDB.Roles.FirstOrDefault(role => role.Id == l.RoleId);
+                var avaibleRole=contextDb.Roles.FirstOrDefault(role => role.Id == l.RoleId);
                 returnData.Find(model => model.Role==avaibleRole).IsAvaible = true;
             }
             return JsonConvert.SerializeObject(returnData);
-            
+             
         }
+        public HttpResponseMessage Post([FromBody] RolesViewModels.ChangeRole dataForChangeRole)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK,
+            new
+            {
+                customer = dataForChangeRole
+            });
+        }
+
+ 
     }
 }
+

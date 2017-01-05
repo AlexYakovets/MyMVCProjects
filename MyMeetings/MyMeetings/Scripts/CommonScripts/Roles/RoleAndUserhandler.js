@@ -16,13 +16,22 @@
         var arr = [];
         $("input[name='roles']").each(function(index, element) {
             var role = {};
-            role.IsAvailible = element.checked;
+            role.IsAvaible = element.checked;
             role.roleId = element.value;
-            //role.userId = 
+            role.userId = findCurrentUserId();
             arr.push(role);
         });
         var data = JSON.stringify(arr);
-        console.log(data);
-        console.log(arr);
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: "API/RoleForUsers",
+            contentType: "application/json"
+        });
+
+        function findCurrentUserId() {
+            return $("input[name='role']:checked").val();
+        }
     });
+
 });
