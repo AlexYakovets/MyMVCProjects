@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyMeetings.Models;
+using PagedList;
 
 namespace MyMeetings.Controllers
 {
@@ -15,10 +16,12 @@ namespace MyMeetings.Controllers
     {
         ApplicationUserManager UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         // GET: Moderation
-        public ActionResult ShowUsers()
+        public ActionResult ShowUsers(int? page)
         {
-            var result = UserManager.Users;
-            return View(result);
+            var result = UserManager.Users.ToList();
+            int pagesize = 3;
+            int pagenumber = (page ?? 1);
+            return View(result.ToPagedList(pagenumber,pagesize));
         }
         public  ActionResult UserDetails(string id)
         {

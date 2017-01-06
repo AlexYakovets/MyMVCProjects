@@ -1,5 +1,6 @@
-﻿@model IEnumerable<MyMeetings.Models.ApplicationUser>
-
+﻿@model PagedList.IPagedList<MyMeetings.Models.ApplicationUser>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "ShowUsers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,7 +43,12 @@
 <ul id="list-of-roles">
 
 </ul>
-<p><a class="btn btn-default btn-save">Save</a></p>
+<p>
+    <a class="btn btn-default btn-save">Save</a>
+</p>
+
+<br/> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("ShowUsers", new { page }))
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
@@ -53,11 +59,10 @@
         $(function() {
             $.ajaxSetup({ cache: false });
             $(".userInfo").click(function(e) {
-
                 e.preventDefault();
                 $.get(this.href, function(data) {
-                    $('#dialogContent').html(data);
-                    $('#modDialog').modal('show');
+                $('#dialogContent').html(data);
+                $('#modDialog').modal('show');
                 });
             });
         })
