@@ -40,31 +40,34 @@
         </tr>
     }
 </table>
-<ul id="list-of-roles">
+@*<ul id="list-of-roles">
 
-</ul>
+</ul>*@
+<label class="checkbox-inline" id="list-of-roles">
+    
+</label>
 <p>
-    <a class="btn btn-default btn-save">Save</a>
-</p>
+        <a class="btn btn-default btn-save">Save</a>
+    </p>
 
-<br/> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("ShowUsers", new { page }))
-@section Scripts {
+    <br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("ShowUsers", new { page }))
+    @section Scripts {
 
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Scripts.Render("~/scripts/commonscripts/roles/roleanduserhandler.js")
-    <script type="text/javascript">
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+        @Scripts.Render("~/scripts/commonscripts/roles/roleanduserhandler.js")
+        <script type="text/javascript">
 
-        $(function() {
-            $.ajaxSetup({ cache: false });
-            $(".userInfo").click(function(e) {
-                e.preventDefault();
-                $.get(this.href, function(data) {
-                $('#dialogContent').html(data);
-                $('#modDialog').modal('show');
+            $(function () {
+                $.ajaxSetup({ cache: false });
+                $(".userInfo").click(function (e) {
+                    e.preventDefault();
+                    $.get(this.href, function (data) {
+                        $('#dialogContent').html(data);
+                        $('#modDialog').modal('show');
+                    });
                 });
-            });
-        })
-    </script>
-}
+            })
+        </script>
+    }
