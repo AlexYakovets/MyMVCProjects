@@ -6,11 +6,11 @@
             console.log(data);
             var role = JSON.parse(data);
             //$('#list-of-roles li').remove();
-            $('#list-of-roles input').remove();
+            $("div[name='role-div']").remove();
             role.forEach(function(elem) {
                 //$("#list-of-roles").append("<li><input type='checkbox' data-userId="+elem.userId+" name='roles' " + (elem.IsAvaible ? "checked" : " ") + " value=" + elem.Role.Id + ">" + elem.Role.Name + "</li>");
-                $("#list-of-roles").append("<input type='checkbox' data-userId=" + elem.userId + " name='roles' " + (elem.IsAvaible ? "checked" : " ") + " value=" + elem.Role.Id + ">" + elem.Role.Name + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp");
-                Console.log();
+                $("#list-of-roles").append("<div  padding: 100px name='role-div'><input type='checkbox' name='roles' " + (elem.IsAvaible ? "checked" : " ") + " value=" + elem.Role.Id + ">" + elem.Role.Name + "</div>");
+                console.log("1");
             });
 
         }

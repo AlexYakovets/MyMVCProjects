@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201612281708455_DataMigration.Designer.cs">
       <DependentUpon>201612281708455_DataMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701071745126_edited ApplicationUser model.cs" />
+    <Compile Include="Migrations\201701071745126_edited ApplicationUser model.Designer.cs">
+      <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -397,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612281708455_DataMigration.resx">
       <DependentUpon>201612281708455_DataMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701071745126_edited ApplicationUser model.resx">
+      <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -20,14 +20,37 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10 ">
+            @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SurName, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10 ">
+            @Html.TextBoxFor(m => m.SurName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.SurName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10 ">
+            @Html.RadioButtonFor(m => m.Gender, "женский")
+            <span>женский</span>
+        @*</div>
+        <div class="col-md-10 ">*@
+            @Html.RadioButtonFor(m => m.Gender, "мужской")
+            <span>мужской</span>
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control"} })
             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
         <div class="col-md-7">

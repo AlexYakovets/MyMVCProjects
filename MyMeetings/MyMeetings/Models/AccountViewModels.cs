@@ -70,6 +70,20 @@ namespace MyMeetings.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} должно быть не менее {2} символов.", MinimumLength = 2)]
+        [Display(Name = "Имя")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} должна быть не менее {2} символов.", MinimumLength = 2)]
+        [Display(Name = "Фамилия")]
+        public string SurName { get; set; }
+
+        [Required]
+        [Display(Name = "Пол")]
+        public string Gender { get; set; }
+
         [Display(Name = "Дата Рождения")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
@@ -77,7 +91,7 @@ namespace MyMeetings.Models
 
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} должен быть не менее {2} символов.", MinimumLength = 6)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 

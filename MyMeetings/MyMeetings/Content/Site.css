@@ -36,5 +36,7 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
-
+#list-of-roles div {
+    display: inline-block;
+}
 
