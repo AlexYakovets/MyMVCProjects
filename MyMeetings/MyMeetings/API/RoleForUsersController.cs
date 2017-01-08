@@ -24,16 +24,19 @@ namespace MyMeetings.API
 {
     public class RoleForUsersController : ApiController
     {
+        public ApplicationUserManager userManager;
+        public AccountController accountManager;
         public string Get(string id)
         {
             List<RolesViewModels.UserRoles> returnData = new List<RolesViewModels.UserRoles>();
             IOwinContext context = new OwinContext();
             ApplicationDbContext contextDb = ApplicationDbContext.Create();
-
-            ApplicationUserManager manager =
+            if(userManager==null)
+             userManager =
                 new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            AccountController accountManager = new AccountController(manager,
-                new ApplicationSignInManager(manager, context.Authentication));
+            if (accountManager==null)
+                accountManager = new AccountController(userManager,
+                new ApplicationSignInManager(userManager, context.Authentication));
             foreach (var r in contextDb.Roles)
             {
                 RolesViewModels.UserRoles role = new RolesViewModels.UserRoles();
@@ -55,7 +58,8 @@ namespace MyMeetings.API
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Gone);
             ApplicationDbContext contextDb = new ApplicationDbContext();
-            ApplicationUserManager userManager =
+             if(userManager==null)
+                userManager =
                 new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             foreach (var roleJson in data)
             {

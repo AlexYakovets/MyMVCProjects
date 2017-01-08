@@ -64,15 +64,7 @@
                 for details on setting up this ASP.NET application to support two-factor authentication.
             </p>
 
-            <div>
-                @using (Ajax.BeginForm("FindUsers", "Find", new AjaxOptions {UpdateTargetId = "results"}))
-                {
-                    <input type="text" name="name"/>
-                    <input type="submit" value="Поиск"/>
-                }
-                <div id="results"></div>
-            </div>
-            
+        
             @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
