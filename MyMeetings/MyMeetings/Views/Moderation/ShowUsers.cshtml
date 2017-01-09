@@ -7,11 +7,11 @@
 }
 <h2>Пользователи</h2>
 
-@using (Html.ActionLink("","ShowUsers"))
+@*@using (Html.ActionLink("","ShowUsers"))
 {
     <input type="text" name="userName"/>
     <input type="submit" value="Поиск"/>
-}
+}*@
 
     <div id="modDialog" class="modal fade">
         <div id="dialogContent" class="modal-dialog"></div>
@@ -34,7 +34,7 @@
                 </td>
                 <td>
                     <a class="userInfo" href='@Url.Action("UserDetails", "Moderation", new {id = m.Id})'>
-                        <img src="~/Content/images/UserInfo.png" width="18" height="18"><img />
+                    <img src="~/Content/images/UserInfo.png" width="18" height="18">
                     </a>
                 </td>
             </tr>

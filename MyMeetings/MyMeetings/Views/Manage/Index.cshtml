@@ -64,7 +64,7 @@
                 for details on setting up this ASP.NET application to support two-factor authentication.
             </p>
 
-        
+
             @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -86,6 +86,7 @@
                     }
                 }*@
         </dd>
+        <dd><img src=@Model.AvatarPath width="80" height="100"><img/></dd>
     </dl>
 </div>
 @Scripts.Render("~/scripts/jquery-1.12.4.min.js")

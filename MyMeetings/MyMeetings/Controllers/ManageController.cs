@@ -32,26 +32,14 @@ namespace MyMeetings.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
+            private set { _signInManager = value; }
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         //
@@ -59,22 +47,41 @@ namespace MyMeetings.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
-
+                message == ManageMessageId.ChangePasswordSuccess
+                    ? "Your password has been changed."
+                    : message == ManageMessageId.SetPasswordSuccess
+                        ? "Your password has been set."
+                        : message == ManageMessageId.SetTwoFactorSuccess
+                            ? "Your two-factor authentication provider has been set."
+                            : message == ManageMessageId.Error
+                                ? "An error has occurred."
+                                : message == ManageMessageId.AddPhoneSuccess
+                                    ? "Your phone number was added."
+                                    : message == ManageMessageId.RemovePhoneSuccess
+                                        ? "Your phone number was removed."
+                                        : "";
             var userId = User.Identity.GetUserId();
+            var avatarPath = System.Web.HttpContext.Current.Server.MapPath(
+                ConfigurationManager.AppSettings["UserAvatarsPath"] +
+                userId + ".png");
+            if (System.IO.File.Exists(avatarPath) == true)
+            {
+                avatarPath = ConfigurationManager.AppSettings["UserAvatarsPath"] +
+                               userId + ".png";
+            }
+            else if (System.IO.File.Exists(avatarPath)==false)
+            {  
+              avatarPath = ConfigurationManager.AppSettings["UserAvatarsPath"] +
+              "default.png";
+            }
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                AvatarPath = avatarPath.Remove(0,1)
             };
             return View(model);
         }
@@ -86,7 +93,10 @@ namespace MyMeetings.Controllers
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
-            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            var result =
+                await
+                    UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                        new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -100,7 +110,7 @@ namespace MyMeetings.Controllers
             {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("ManageLogins", new { Message = message });
+            return RedirectToAction("ManageLogins", new {Message = message});
         }
 
         //
@@ -131,7 +141,7 @@ namespace MyMeetings.Controllers
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            return RedirectToAction("VerifyPhoneNumber", new {PhoneNumber = model.Number});
         }
 
         //
@@ -170,7 +180,9 @@ namespace MyMeetings.Controllers
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null
+                ? View("Error")
+                : View(new VerifyPhoneNumberViewModel {PhoneNumber = phoneNumber});
         }
 
         //
@@ -183,7 +195,8 @@ namespace MyMeetings.Controllers
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
+            var result =
+                await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -191,7 +204,7 @@ namespace MyMeetings.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                return RedirectToAction("Index", new {Message = ManageMessageId.AddPhoneSuccess});
             }
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "Failed to verify phone");
@@ -207,14 +220,14 @@ namespace MyMeetings.Controllers
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                return RedirectToAction("Index", new {Message = ManageMessageId.Error});
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return RedirectToAction("Index", new {Message = ManageMessageId.RemovePhoneSuccess});
         }
 
         //
@@ -234,7 +247,8 @@ namespace MyMeetings.Controllers
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result =
+                await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -242,7 +256,7 @@ namespace MyMeetings.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new {Message = ManageMessageId.ChangePasswordSuccess});
             }
             AddErrors(result);
             return View(model);
@@ -271,7 +285,7 @@ namespace MyMeetings.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", new {Message = ManageMessageId.SetPasswordSuccess});
                 }
                 AddErrors(result);
             }
@@ -285,16 +299,21 @@ namespace MyMeetings.Controllers
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+                message == ManageMessageId.RemoveLoginSuccess
+                    ? "The external login was removed."
+                    : message == ManageMessageId.Error
+                        ? "An error has occurred."
+                        : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
             {
                 return View("Error");
             }
             var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
-            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
+            var otherLogins =
+                AuthenticationManager.GetExternalAuthenticationTypes()
+                    .Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider))
+                    .ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
             return View(new ManageLoginsViewModel
             {
@@ -310,7 +329,8 @@ namespace MyMeetings.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"),
+                User.Identity.GetUserId());
         }
 
         //
@@ -320,11 +340,14 @@ namespace MyMeetings.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
             {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+                return RedirectToAction("ManageLogins", new {Message = ManageMessageId.Error});
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+            return result.Succeeded
+                ? RedirectToAction("ManageLogins")
+                : RedirectToAction("ManageLogins", new {Message = ManageMessageId.Error});
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -336,16 +359,14 @@ namespace MyMeetings.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            get { return HttpContext.GetOwinContext().Authentication; }
         }
 
         private void AddErrors(IdentityResult result)
@@ -375,14 +396,15 @@ namespace MyMeetings.Controllers
             }
             return false;
         }
-        const int maxWidth = 400;
-        const int maxHeight = 400;
-        public void SaveImage(HttpPostedFileBase hpf,string username)
+
+        public void SaveImage(HttpPostedFileBase hpf, string username)
         {
+            const int maxWidth = 100;
+            const int maxHeight = 100;
             if (hpf != null && hpf.ContentLength != 0 /*&& hpf.ContentLength <= 307200*/)
             {
                 using (System.Drawing.Bitmap originalPic =
-                            new System.Drawing.Bitmap(hpf.InputStream, false))
+                    new System.Drawing.Bitmap(hpf.InputStream, false))
                 {
                     // Вычисление новых размеров картинки
                     int width = originalPic.Width; //текущая ширина
@@ -392,71 +414,67 @@ namespace MyMeetings.Controllers
 
                     // Определение размеров, которые необходимо изменять
                     bool doWidthResize = (maxWidth > 0 && width > maxWidth &&
-                                        widthDiff > -1 && widthDiff > heightDiff);
+                                          widthDiff > -1 && widthDiff > heightDiff);
                     bool doHeightResize = (maxHeight > 0 && height > maxHeight &&
-                                        heightDiff > -1 && heightDiff > widthDiff);
+                                           heightDiff > -1 && heightDiff > widthDiff);
 
                     // Ресайз картинки
                     if (doWidthResize || doHeightResize || (width.Equals(height)
-                                    && widthDiff.Equals(heightDiff)))
+                                                            && widthDiff.Equals(heightDiff)))
                     {
                         int iStart;
                         Decimal divider;
                         if (doWidthResize)
                         {
                             iStart = width;
-                            divider = Math.Abs((Decimal)iStart / maxWidth);
+                            divider = Math.Abs((Decimal) iStart/maxWidth);
                             width = maxWidth;
-                            height = (int)Math.Round((height / divider));
+                            height = (int) Math.Round((height/divider));
                         }
                         else
                         {
                             iStart = height;
-                            divider = Math.Abs((Decimal)iStart / maxHeight);
+                            divider = Math.Abs((Decimal) iStart/maxHeight);
                             height = maxHeight;
-                            width = (int)Math.Round((width / divider));
+                            width = (int) Math.Round((width/divider));
                         }
                     }
 
                     // Сохраняем файл в папку пользователя
                     using (System.Drawing.Bitmap newBMP =
-                            new System.Drawing.Bitmap(originalPic, width, height))
+                        new System.Drawing.Bitmap(originalPic, width, height))
                     {
                         using (System.Drawing.Graphics oGraphics =
-                                    System.Drawing.Graphics.FromImage(newBMP))
+                            System.Drawing.Graphics.FromImage(newBMP))
                         {
                             oGraphics.SmoothingMode =
-                                    System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                                System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                             oGraphics.InterpolationMode =
-                 System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                                System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                             oGraphics.DrawImage(originalPic, 0, 0, width, height);
 
                             int idx = hpf.FileName.LastIndexOf('.');
                             string ext =
-                             hpf.FileName.Substring(idx, hpf.FileName.Length - idx);
-
+                                hpf.FileName.Substring(idx, hpf.FileName.Length - idx);
                             // Формируем имя для картинки
-                          
-
-
                             string filePath =
                                 System.Web.HttpContext.Current.Server.MapPath(
-                                ConfigurationManager.AppSettings["UserAvatarsPath"] +
+                                    ConfigurationManager.AppSettings["UserAvatarsPath"] +
                                     username + ".png");
-
                             if (System.IO.File.Exists(filePath))
                                 System.IO.File.Delete(filePath);
                             newBMP.Save(filePath);
                         }
                     }
                 }
-
             }
         }
+
         public ActionResult Uploader()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Uploader(FormCollection form)
         {
@@ -465,6 +483,7 @@ namespace MyMeetings.Controllers
 
             return RedirectToAction("uploader");
         }
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -476,7 +495,6 @@ namespace MyMeetings.Controllers
             Error
         }
 
-
-#endregion
+        #endregion
     }
 }

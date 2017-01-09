@@ -12,6 +12,7 @@ namespace MyMeetings.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string AvatarPath { get; set; }
     }
 
     public class ManageLoginsViewModel
