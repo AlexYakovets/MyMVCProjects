@@ -470,9 +470,9 @@ namespace MyMeetings.Controllers
             }
         }
 
-        public ActionResult Uploader()
+        public ActionResult LoadImage()
         {
-            return View();
+            return View("LoadImage");
         }
 
         [HttpPost]
@@ -481,7 +481,7 @@ namespace MyMeetings.Controllers
             HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
             SaveImage(hpf, User.Identity.GetUserId());
 
-            return RedirectToAction("uploader");
+            return RedirectToAction("LoadImage");
         }
 
         public enum ManageMessageId

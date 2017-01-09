@@ -324,6 +324,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\CommonScripts\Manage\ValidateFileFormat.js" />
     <Content Include="Scripts\CommonScripts\Roles\RoleAndUserhandler.js" />
     <Content Include="Scripts\CommonScripts\Shared\DatePickerForInputData.js" />
     <Content Include="Scripts\CommonScripts\TestAjax.js" />
@@ -385,8 +386,8 @@
     <Content Include="Views\Roles\AddToUser.cshtml" />
     <Content Include="Views\Moderation\ShowUsers.cshtml" />
     <Content Include="Views\Moderation\UserDetails.cshtml" />
-    <Content Include="Views\Manage\Uploader.cshtml" />
     <Content Include="Views\Moderation\FindUsers.cshtml" />
+    <Content Include="Views\Manage\LoadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
