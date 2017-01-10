@@ -23,35 +23,21 @@ namespace MyMeetings.Controllers
         //}
         //POST: /Account/FindUser
         [HttpPost]
+
         public ActionResult FindUsers(string userName, string userFirstname, string userSurname)
         {
-            IEnumerable<ApplicationUser> ListOfUsers = DBContext.Users.ToList();
-            //    var users =
-            //        ListOfUsers.Where(
-            //            a =>
-            //                (!userName.IsNullOrWhiteSpace() ? a.UserName.Contains(userName) : true)).Where(a=>(!userFirstname.IsNullOrWhiteSpace() ? a.FirstName.Contains(userFirstname) : true)).Where(a=>(!userSurname.IsNullOrWhiteSpace() ? a.SurName.Contains(userSurname) : true)).ToList();
+            // Подготовка запросы
+            IEnumerable<ApplicationUser> tempUsers = DBContext.Users;
+            if (userName != "") tempUsers = tempUsers.Where(u => u.UserName.Contains(userName));
+            if (userFirstname != "") tempUsers = tempUsers.Where(u => u.FirstName.Contains(userFirstname));
+            if (userSurname != "") tempUsers = tempUsers.Where(u => u.SurName.Contains(userSurname));
 
-            if (userName.IsNullOrWhiteSpace() == false)
-            {
-
-                ListOfUsers = ListOfUsers.Where(user => user.UserName.Contains(userName)).ToList();
-    }
-            if (userFirstname.IsNullOrWhiteSpace() == false)
-            {
-
-                ListOfUsers = ListOfUsers.Where(user => user.FirstName.Contains(userFirstname)).ToList();
-}
-            if (userSurname.IsNullOrWhiteSpace() == false)
-            {
-
-                ListOfUsers = ListOfUsers.Where(user => user.SurName.Contains(userSurname)).ToList();
-            }
-
-            if (ListOfUsers.Count<=0)
+            List<ApplicationUser> users = tempUsers.ToList();
+            if (users.Count == 0)
             {
                 return HttpNotFound();
             }
-            return PartialView(ListOfUsers);
+            return PartialView(users);
         }
 
         public string Get()
