@@ -386,7 +386,6 @@
     <Content Include="Views\Roles\AddToUser.cshtml" />
     <Content Include="Views\Moderation\ShowUsers.cshtml" />
     <Content Include="Views\Moderation\UserDetails.cshtml" />
-    <Content Include="Views\Moderation\FindUsers.cshtml" />
     <Content Include="Views\Manage\LoadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>

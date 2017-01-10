@@ -22,21 +22,22 @@ namespace MyMeetings.Controllers
         //    return View();
         //}
         //POST: /Account/FindUser
-        [HttpPost]
 
+        [HttpPost]
         public ActionResult FindUsers(string userName, string userFirstname, string userSurname)
         {
-            // Подготовка запросы
             IEnumerable<ApplicationUser> tempUsers = DBContext.Users;
-            if (userName != "") tempUsers = tempUsers.Where(u => u.UserName.Contains(userName));
-            if (userFirstname != "") tempUsers = tempUsers.Where(u => u.FirstName.Contains(userFirstname));
-            if (userSurname != "") tempUsers = tempUsers.Where(u => u.SurName.Contains(userSurname));
-
+            if (userName != "") tempUsers = tempUsers.Where(u => u.UserName.ToLower().Contains(userName.ToLower()));
+            if (userFirstname != "")
+                tempUsers =
+                    tempUsers.Where(u => !String.IsNullOrEmpty(u.FirstName))
+                        .Where(u => u.FirstName.ToLower().Contains(userFirstname.ToLower()));
+            if (userSurname != "")
+                tempUsers =
+                    tempUsers.Where(u => !String.IsNullOrEmpty(u.SurName))
+                        .Where(u => u.SurName.ToLower().Contains(userSurname.ToLower()));
+            tempUsers = tempUsers.OrderBy(m => m.UserName).OrderBy(m => m.FirstName).OrderBy(m => m.SurName);
             List<ApplicationUser> users = tempUsers.ToList();
-            if (users.Count == 0)
-            {
-                return HttpNotFound();
-            }
             return PartialView(users);
         }
 

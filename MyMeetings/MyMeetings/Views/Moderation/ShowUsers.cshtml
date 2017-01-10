@@ -9,10 +9,21 @@
 <div>
     @using (Ajax.BeginForm("FindUsers", "Find", new AjaxOptions {UpdateTargetId = "results"}))
     {
-        <input type="text" name="userName"/>
-        <input type="text" name="userFirstname"/>
-        <input type="text" name="userSurname"/>
-        <input type="submit" value="Поиск"/>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>UserId</th>
+                <th>FirstName</th>
+                <th>SurName</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input type="text" name="userName" class="col-md-3"/></td>
+                <td><input type="text" name="userFirstname"class="col-md-3"/></td>
+                <td><input type="text" name="userSurname"class="col-md-3"/></td>
+                <td><input type="submit" value="Поиск"/></td>
+            </tr>
+        </table>
     }
 </div>
 
@@ -24,7 +35,10 @@
         <thead>
         <tr>
             <th>Отметка</th>
-            <th>Логин</th>
+            <th>UseId</th>
+            <th>FirstName</th>
+            <th>SurName</th>
+
         </tr>
         </thead>
         @foreach (var m in Model)
@@ -35,6 +49,12 @@
                 </td>
                 <td>
                     <p>@m.UserName </p>
+                </td>
+                <td>
+                    <p>@m.FirstName </p>
+                </td>
+                <td>
+                    <p>@m.SurName </p>
                 </td>
                 <td>
                     <a class="userInfo" href='@Url.Action("UserDetails", "Moderation", new {id = m.Id})'>
