@@ -249,6 +249,7 @@
     <Compile Include="Models\ApplicationRoleManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModerationViewModels.cs" />
     <Compile Include="Models\RolesViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -390,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ModerationViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

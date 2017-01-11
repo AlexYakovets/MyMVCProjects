@@ -1,5 +1,6 @@
 ﻿
-@model MyMeetings.Models.ApplicationUser
+@using System.Net.Configuration
+@model MyMeetings.Models.ModerationViewModels.UserDetailsViewModel
 
 <div class="modal-content">
     <div class="modal-header">
@@ -8,26 +9,26 @@
     </div>
     <div class="modal-body">
         <dl class="dl-horizontal">
-            <dt>Email пользователя:</dt>
+            <dt>user E-mail:</dt>
             <dd>@Html.DisplayFor(model => model.Email)</dd>
-
-            @*<dt>Назначенные роли</dt>
-             {
-    
-            <ul>
-                @foreach (var s in Model.Roles.ToList())
-                {
-                    
-                    <li>@s.RoleId</li>
-                }
-            </ul>*@
-
-               
-
-            <dt>Дата Рождения</dt>
+            <dt>Firstname</dt>
+            <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+            <dt>Surname</dt>
+            <dd>@Html.DisplayFor(model => model.SurName)</dd>
+            <dt>Date of birth</dt>
             <dd>@Html.DisplayFor(model => model.DateOfBirth)</dd>
+            <dt>Date of registration</dt>
+            <dd>@Html.DisplayFor(model => model.DateOfRegistration)</dd>
+            <dt>Gender</dt>
+            <dd>@Html.DisplayFor(model => model.Gender)</dd>
+            <dt>Roles</dt>
+                @foreach (var item in Model.Roles)
 
-           
+                { 
+                <dd>
+                    <p>@item</p>
+                    </dd>
+                }
         </dl>
     </div>
 </div>

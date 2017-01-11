@@ -40,7 +40,6 @@ namespace MyMeetings.Controllers
             List<ApplicationUser> users = tempUsers.ToList();
             return PartialView(users);
         }
-
         public string Get()
         {
             return JsonConvert.SerializeObject(DBContext.Users);
