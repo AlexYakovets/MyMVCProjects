@@ -21,8 +21,10 @@
                             <input type="file" id="imagefile" name="imagefile"/>
                             <br/>
                             <input type="submit" id="upload-image-button" value="Сохранить"/>
-
+                            <div id="status-message"></div>
+                            @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
                         </form>
+                       
                         @*}*@
                     </dd>
                 </dl>
@@ -30,6 +32,6 @@
         </div>
     </div>
 </div>
-@Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
+
 
 

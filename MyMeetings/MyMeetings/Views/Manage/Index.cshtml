@@ -12,25 +12,31 @@
     <h4>Change your account settings</h4>
     <hr/>
     <dl class="dl-horizontal">
-        <dt>Ваше фото:</dt>
-        <dd><img src=@Model.AvatarPath width="80" height="100"><img/></dd>
-        <dd> <a class="upload-image" href='@Url.Action("LoadImage", "Manage")'>
-            <input type="button" value="Изменить аватар">
-        </a></dd>
+        <div class="block-of-settings" id="userPhoto" style="float: left; min-height: 150px;padding-right: 20px">
 
+            <dd><img src=@Model.AvatarPath class="photocard"><img /></dd>
+            <dd>
+                <h2>Your photo:</h2>
+                <a class="upload-image" href='@Url.Action("LoadImage", "Manage")'>
+                    <input type="button" value="Изменить аватар">
+                </a>
+            </dd>
+        </div>
+        <div class="block-of-settings" style="float:left">
         <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
+            <dd>
+                [
+                @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+            </dd>
+            </div>
+      
         <dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [
@@ -40,10 +46,11 @@
     </dl>
 
 </div>
-@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+@*@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")*@
 @Scripts.Render("~/scripts/jquery-1.12.4.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+@Styles.Render("~/content/PageStyles/manage-index-style.css")
 <script type="text/javascript">
             $(function () {
                 $.ajaxSetup({ cache: false });

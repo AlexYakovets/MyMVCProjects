@@ -84,7 +84,7 @@
     @Html.PagedListPager(Model, page => Url.Action("ShowUsers", new {page}))
 </div>
 @section Scripts {
-
+    @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @Scripts.Render("~/scripts/commonscripts/roles/roleanduserhandler.js")

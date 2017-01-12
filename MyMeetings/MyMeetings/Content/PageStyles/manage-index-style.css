@@ -1,0 +1,12 @@
+﻿.photocard {
+    display: block;
+     width: 120px;
+    width: 100px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #666;
+}
+.block-of-settings {
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
