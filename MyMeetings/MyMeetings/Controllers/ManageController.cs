@@ -476,12 +476,12 @@ namespace MyMeetings.Controllers
         }
 
         [HttpPost]
-        public ActionResult Uploader(FormCollection form)
+        public ActionResult LoadImage(FormCollection form)
         {
             HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
             SaveImage(hpf, User.Identity.GetUserId());
 
-            return RedirectToAction("LoadImage");
+            return RedirectToAction("Index");
         }
 
         public enum ManageMessageId

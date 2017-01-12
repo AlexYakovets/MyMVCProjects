@@ -4,24 +4,32 @@
 
 <div class="modal-content">
     <div class="modal-header">
-        <button class="close" data-dismiss="modal" area-hidden="true">Закрыть</button>
+        <div>
+            <a class="close" data-dismiss="modal" area-hidden="true">X</a>
+            <div style="clear: both"></div>
+            </div>
+        <div></div>
         <div>
             <div class="modal-body">
                 <dl class="dl-horizontal">
                     <dt>Загрузить фотографию</dt>
                     <dd>
-                    <form method="post" enctype="multipart/form-data">
-                        <input type="file" id="imagefile" name="imagefile" accept="images/png,images/jpeg"/><br/>
-                        <input type="submit" id="upload-image-button" value="Сохранить"/>
-                    </form>
+                        @*@using (Ajax.BeginForm("LoadImage", "Manage", new AjaxOptions {HttpMethod = "POST"}, new {enctype = "multipart/form-data"}))
+                        {*@
+                        @*<form method="post" enctype="multipart/form-data">*@
+                        <form action="/Manage/LoadImage" method="post" enctype="multipart/form-data">
+                            <input type="file" id="imagefile" name="imagefile"/>
+                            <br/>
+                            <input type="submit" id="upload-image-button" value="Сохранить"/>
+
+                        </form>
+                        @*}*@
                     </dd>
                 </dl>
             </div>
         </div>
     </div>
 </div>
-@Scripts.Render("~/scripts/jquery-1.12.4.min.js")
-@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
 
 
