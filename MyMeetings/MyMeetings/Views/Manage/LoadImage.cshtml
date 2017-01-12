@@ -7,7 +7,7 @@
         <div>
             <a class="close" data-dismiss="modal" area-hidden="true">X</a>
             <div style="clear: both"></div>
-            </div>
+        </div>
         <div></div>
         <div>
             <div class="modal-body">
@@ -21,17 +21,15 @@
                             <input type="file" id="imagefile" name="imagefile"/>
                             <br/>
                             <input type="submit" id="upload-image-button" value="Сохранить"/>
-                            <div id="status-message"></div>
-                            @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
                         </form>
-                       
-                        @*}*@
                     </dd>
                 </dl>
             </div>
+            <div class="status-message" style="padding-top: 10px"></div>
         </div>
     </div>
 </div>
+@Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
 
 
 

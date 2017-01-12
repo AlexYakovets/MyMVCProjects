@@ -11,8 +11,8 @@
 <div>
     <h4>Change your account settings</h4>
     <hr/>
-    <dl class="dl-horizontal">
-        <div class="block-of-settings" id="userPhoto" style="float: left; min-height: 150px;padding-right: 20px">
+    <div class="block-of-settings" id="userPhoto" style="float: left; min-height: 150px;padding-right: 20px">
+            <dl class="dl-horizontal">
 
             <dd><img src=@Model.AvatarPath class="photocard"><img /></dd>
             <dd>
@@ -21,13 +21,16 @@
                     <input type="button" value="Изменить аватар">
                 </a>
             </dd>
-        </div>
-        <div class="block-of-settings" style="float:left">
-        <dt>Password:</dt>
+                </dl>
+    </div>
+        <div class="block-of-settings" style="float: left">
+
+            <dl>
+            <dt>Password:</dt>
             <dd>
                 [
-                @if (Model.HasPassword)
-            {
+                @if(Model.HasPassword)
+                {
                     @Html.ActionLink("Change your password", "ChangePassword")
                 }
                 else
@@ -35,15 +38,9 @@
                     @Html.ActionLink("Create", "SetPassword")
                 }
             </dd>
-            </div>
+                </dl>
+        </div>
       
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-
-    </dl>
 
 </div>
 @*@Scripts.Render("~/bundles/jqueryval")
