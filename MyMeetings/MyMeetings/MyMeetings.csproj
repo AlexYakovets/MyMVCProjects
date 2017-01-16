@@ -220,8 +220,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Image.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModerationController.cs" />
+    <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,13 +245,43 @@
     <Compile Include="Migrations\201701071745126_edited ApplicationUser model.Designer.cs">
       <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701131647256_Added Publications.cs" />
+    <Compile Include="Migrations\201701131647256_Added Publications.Designer.cs">
+      <DependentUpon>201701131647256_Added Publications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701141231048_edits in Publication model.cs" />
+    <Compile Include="Migrations\201701141231048_edits in Publication model.Designer.cs">
+      <DependentUpon>201701141231048_edits in Publication model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.cs" />
+    <Compile Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.Designer.cs">
+      <DependentUpon>201701161130506_Added-to-models-functional-with-subscribing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701161154060_edits-in-model-with-subscribers.cs" />
+    <Compile Include="Migrations\201701161154060_edits-in-model-with-subscribers.Designer.cs">
+      <DependentUpon>201701161154060_edits-in-model-with-subscribers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701161217448_edit-identity-model.cs" />
+    <Compile Include="Migrations\201701161217448_edit-identity-model.Designer.cs">
+      <DependentUpon>201701161217448_edit-identity-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701161224088_some edits in identityModel.cs" />
+    <Compile Include="Migrations\201701161224088_some edits in identityModel.Designer.cs">
+      <DependentUpon>201701161224088_some edits in identityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701161624483_add-attributes-in-models-for-communications.cs" />
+    <Compile Include="Migrations\201701161624483_add-attributes-in-models-for-communications.Designer.cs">
+      <DependentUpon>201701161624483_add-attributes-in-models-for-communications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\PublicationModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModerationViewModels.cs" />
+    <Compile Include="Models\PublicationViewModels.cs" />
     <Compile Include="Models\RolesViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -390,6 +422,7 @@
     <Content Include="Views\Moderation\ShowUsers.cshtml" />
     <Content Include="Views\Moderation\UserDetails.cshtml" />
     <Content Include="Views\Manage\LoadImage.cshtml" />
+    <Content Include="Views\Publication\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -411,6 +444,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701071745126_edited ApplicationUser model.resx">
       <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701131647256_Added Publications.resx">
+      <DependentUpon>201701131647256_Added Publications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701141231048_edits in Publication model.resx">
+      <DependentUpon>201701141231048_edits in Publication model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.resx">
+      <DependentUpon>201701161130506_Added-to-models-functional-with-subscribing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701161154060_edits-in-model-with-subscribers.resx">
+      <DependentUpon>201701161154060_edits-in-model-with-subscribers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701161217448_edit-identity-model.resx">
+      <DependentUpon>201701161217448_edit-identity-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701161224088_some edits in identityModel.resx">
+      <DependentUpon>201701161224088_some edits in identityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701161624483_add-attributes-in-models-for-communications.resx">
+      <DependentUpon>201701161624483_add-attributes-in-models-for-communications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

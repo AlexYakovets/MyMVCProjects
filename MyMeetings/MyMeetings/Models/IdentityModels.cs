@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,6 +17,14 @@ namespace MyMeetings.Models
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime DateOfRegistration { get; set; }
+        public virtual ICollection<Publication> Publications { get; set; }
+        //public  ICollection<Publication> Subscriptions { get; set; }
+
+        public ApplicationUser()
+        {
+            Publications = new List<Publication>();
+            //Subscriptions = new List<Publication>();
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -29,14 +39,15 @@ namespace MyMeetings.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Publication> Publications { get; set; }
         public ApplicationDbContext()
             : base("MyMeetings", throwIfV1Schema: false)
         {
-        }
+    }
 
-        public static ApplicationDbContext Create()
+    public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new ApplicationDbContext() {};
         }
     }
 }

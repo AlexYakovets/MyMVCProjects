@@ -1,0 +1,59 @@
+﻿@model MyMeetings.Models.PublicationViewModels.CreateViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create", "Publication", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Создание нового аккаунта</h4>
+    <hr/>
+    <div class="form-group" style="float:left">
+        <div class="label-image-file">
+            <p>Choose image</p>
+        </div>
+        <input type="file" id="imagefile" name="imagefile" />
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="all-groups">
+    <div class="form-group">
+        @Html.LabelFor(m => m.PublicationName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 ">
+            @Html.TextBoxFor(m => m.PublicationName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PublicationName)
+        </div>
+    </div>
+        <div class="form-group">
+            <div >
+            @Html.LabelFor(m => m.Text, new {@class = "col-md-2 control-label"})
+                @*@Html.TextBoxFor(m => m.Text, new { @class = "form-control" })*@
+                <textarea name="text" style="width: 60%" @*rows="10" cols="50"*@>Enter text of description here
+            </textarea>
+                @Html.ValidationMessageFor(m => m.Text)
+            </div>
+        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfMeeting, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.DateOfMeeting, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.DateOfMeeting, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Create"/>
+        </div>
+    </div>
+        </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
+    @Scripts.Render("~/scripts/jquery-ui-1.12.1.min.js")
+    @Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")
+    @Styles.Render("~/content/datePicker.css");
+    @Styles.Render("~/content/Site.css");
+    }

@@ -17,7 +17,6 @@ namespace MyMeetings.Controllers
 {
     public class ModerationController : Controller
     {
-        ApplicationDbContext DBContext = new ApplicationDbContext();
         ApplicationUserManager UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         // GET: Moderation
         public ActionResult ShowUsers(string userName,int? page)
@@ -42,8 +41,8 @@ namespace MyMeetings.Controllers
             ModerationViewModels.UserDetailsViewModel currentDetails=new ModerationViewModels.UserDetailsViewModel();
             var result = UserManager.Users.FirstOrDefault(user => user.Id == id);
             currentDetails.Email = result.Email??"";
-            currentDetails.FirstName = result.FirstName??"";
-            currentDetails.SurName = result.SurName??"";
+            currentDetails.FirstName = result.FirstName;
+            currentDetails.SurName = result.SurName;
             currentDetails.DateOfBirth = result.DateOfBirth.ToShortDateString()??"";
             currentDetails.DateOfRegistration = result.DateOfRegistration.ToShortDateString();
             currentDetails.Gender = result.Gender;
