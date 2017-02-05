@@ -18,12 +18,12 @@ namespace MyMeetings.Models
         public DateTime DateOfBirth { get; set; }
         public DateTime DateOfRegistration { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
-        //public  ICollection<Publication> Subscriptions { get; set; }
+        public ICollection<Publication> Subscriptions { get; set; }
 
         public ApplicationUser()
         {
             Publications = new List<Publication>();
-            //Subscriptions = new List<Publication>();
+            Subscriptions = new List<Publication>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

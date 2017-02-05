@@ -19,13 +19,13 @@ namespace MyMeetings.Models
         public DateTime DateTimeOfPublication { get; set; }
         public DateTime DateOfMeeting { get; set; }
         public string AuthorId { get; set; }
-        public ApplicationUser Author { get; set; }
-        //[InverseProperty("Subscriptions")]
-        //public ICollection<ApplicationUser> Subscriptions { get; set; }
+        public virtual ApplicationUser Author { get; set; }
+        [InverseProperty("Subscriptions")]
+        public ICollection<ApplicationUser> Subscriptions { get; set; }
 
         public Publication()
         {
-            //Subscriptions = new List<ApplicationUser>();
+            Subscriptions = new List<ApplicationUser>();
             DateTimeOfPublication = DateTime.Now;
             Id = Guid.NewGuid().ToString();
         }

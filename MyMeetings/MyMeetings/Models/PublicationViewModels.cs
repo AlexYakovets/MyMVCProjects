@@ -11,12 +11,12 @@ namespace MyMeetings.Models
         public class PartialPublication
         {
             public string ImagePath;
-
             public string Creator;
-
             public DateTime DateOfPublication;
-
             public string PublicationName;
+            public DateTime DateOfMeet;
+            public List<ApplicationUser> Subscribers;
+            public string PublicationText;
 
         }
         public class CreateViewModel

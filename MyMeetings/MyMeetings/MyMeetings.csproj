@@ -223,55 +223,23 @@
     <Compile Include="Controllers\Image.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModerationController.cs" />
-    <Compile Include="Controllers\PublicationController.cs" />
+    <Compile Include="Controllers\PublicationsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612201850368_InitialCreate.cs" />
-    <Compile Include="Migrations\201612201850368_InitialCreate.Designer.cs">
-      <DependentUpon>201612201850368_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201701161957137_added suscribe into models.cs" />
+    <Compile Include="Migrations\201701161957137_added suscribe into models.Designer.cs">
+      <DependentUpon>201701161957137_added suscribe into models.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612201904194_FirstMyMeetMigration.cs" />
-    <Compile Include="Migrations\201612201904194_FirstMyMeetMigration.Designer.cs">
-      <DependentUpon>201612201904194_FirstMyMeetMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201701171544587_some edits in identityModel.cs" />
+    <Compile Include="Migrations\201701171544587_some edits in identityModel.Designer.cs">
+      <DependentUpon>201701171544587_some edits in identityModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612281708455_DataMigration.cs" />
-    <Compile Include="Migrations\201612281708455_DataMigration.Designer.cs">
-      <DependentUpon>201612281708455_DataMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701071745126_edited ApplicationUser model.cs" />
-    <Compile Include="Migrations\201701071745126_edited ApplicationUser model.Designer.cs">
-      <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701131647256_Added Publications.cs" />
-    <Compile Include="Migrations\201701131647256_Added Publications.Designer.cs">
-      <DependentUpon>201701131647256_Added Publications.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701141231048_edits in Publication model.cs" />
-    <Compile Include="Migrations\201701141231048_edits in Publication model.Designer.cs">
-      <DependentUpon>201701141231048_edits in Publication model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.cs" />
-    <Compile Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.Designer.cs">
-      <DependentUpon>201701161130506_Added-to-models-functional-with-subscribing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701161154060_edits-in-model-with-subscribers.cs" />
-    <Compile Include="Migrations\201701161154060_edits-in-model-with-subscribers.Designer.cs">
-      <DependentUpon>201701161154060_edits-in-model-with-subscribers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701161217448_edit-identity-model.cs" />
-    <Compile Include="Migrations\201701161217448_edit-identity-model.Designer.cs">
-      <DependentUpon>201701161217448_edit-identity-model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701161224088_some edits in identityModel.cs" />
-    <Compile Include="Migrations\201701161224088_some edits in identityModel.Designer.cs">
-      <DependentUpon>201701161224088_some edits in identityModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701161624483_add-attributes-in-models-for-communications.cs" />
-    <Compile Include="Migrations\201701161624483_add-attributes-in-models-for-communications.Designer.cs">
-      <DependentUpon>201701161624483_add-attributes-in-models-for-communications.cs</DependentUpon>
+    <Compile Include="Migrations\201701171558547_added lazy loading to identitModel.cs" />
+    <Compile Include="Migrations\201701171558547_added lazy loading to identitModel.Designer.cs">
+      <DependentUpon>201701171558547_added lazy loading to identitModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -301,6 +269,7 @@
     <Content Include="Content\images\UserInfo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PageStyles\manage-index-style.css" />
+    <Content Include="Content\PageStyles\publications-show.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -380,7 +349,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -422,7 +393,8 @@
     <Content Include="Views\Moderation\ShowUsers.cshtml" />
     <Content Include="Views\Moderation\UserDetails.cshtml" />
     <Content Include="Views\Manage\LoadImage.cshtml" />
-    <Content Include="Views\Publication\Create.cshtml" />
+    <Content Include="Views\Publications\Create.cshtml" />
+    <Content Include="Views\Publications\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,38 +405,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612201850368_InitialCreate.resx">
-      <DependentUpon>201612201850368_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701161957137_added suscribe into models.resx">
+      <DependentUpon>201701161957137_added suscribe into models.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612201904194_FirstMyMeetMigration.resx">
-      <DependentUpon>201612201904194_FirstMyMeetMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701171544587_some edits in identityModel.resx">
+      <DependentUpon>201701171544587_some edits in identityModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612281708455_DataMigration.resx">
-      <DependentUpon>201612281708455_DataMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701071745126_edited ApplicationUser model.resx">
-      <DependentUpon>201701071745126_edited ApplicationUser model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701131647256_Added Publications.resx">
-      <DependentUpon>201701131647256_Added Publications.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701141231048_edits in Publication model.resx">
-      <DependentUpon>201701141231048_edits in Publication model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701161130506_Added-to-models-functional-with-subscribing.resx">
-      <DependentUpon>201701161130506_Added-to-models-functional-with-subscribing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701161154060_edits-in-model-with-subscribers.resx">
-      <DependentUpon>201701161154060_edits-in-model-with-subscribers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701161217448_edit-identity-model.resx">
-      <DependentUpon>201701161217448_edit-identity-model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701161224088_some edits in identityModel.resx">
-      <DependentUpon>201701161224088_some edits in identityModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701161624483_add-attributes-in-models-for-communications.resx">
-      <DependentUpon>201701161624483_add-attributes-in-models-for-communications.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701171558547_added lazy loading to identitModel.resx">
+      <DependentUpon>201701171558547_added lazy loading to identitModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

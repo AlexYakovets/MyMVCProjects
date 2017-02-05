@@ -7,13 +7,13 @@ namespace MyMeetings.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class editsinmodelwithsubscribers : IMigrationMetadata
+    public sealed partial class addedlazyloadingtoidentitModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(editsinmodelwithsubscribers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedlazyloadingtoidentitModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701161154060_edits-in-model-with-subscribers"; }
+            get { return "201701171558547_added lazy loading to identitModel"; }
         }
         
         string IMigrationMetadata.Source

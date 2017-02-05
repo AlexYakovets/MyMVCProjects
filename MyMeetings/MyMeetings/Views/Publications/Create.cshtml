@@ -5,10 +5,10 @@
 }
 
 <h2>Create</h2>
-@using (Html.BeginForm("Create", "Publication", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Создание нового аккаунта</h4>
+    <h4>Create new meeting</h4>
     <hr/>
     <div class="form-group" style="float:left">
         <div class="label-image-file">
@@ -29,7 +29,7 @@
             <div >
             @Html.LabelFor(m => m.Text, new {@class = "col-md-2 control-label"})
                 @*@Html.TextBoxFor(m => m.Text, new { @class = "form-control" })*@
-                <textarea name="text" style="width: 60%" @*rows="10" cols="50"*@>Enter text of description here
+                <textarea name="text" style="width: 60%" rows="10" @*cols="50"*@>Enter text of description here
             </textarea>
                 @Html.ValidationMessageFor(m => m.Text)
             </div>

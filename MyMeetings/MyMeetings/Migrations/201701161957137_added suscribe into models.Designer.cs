@@ -7,13 +7,13 @@ namespace MyMeetings.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addattributesinmodelsforcommunications : IMigrationMetadata
+    public sealed partial class addedsuscribeintomodels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addattributesinmodelsforcommunications));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedsuscribeintomodels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701161624483_add-attributes-in-models-for-communications"; }
+            get { return "201701161957137_added suscribe into models"; }
         }
         
         string IMigrationMetadata.Source
