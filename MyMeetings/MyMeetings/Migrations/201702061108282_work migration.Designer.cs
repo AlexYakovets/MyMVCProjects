@@ -7,13 +7,13 @@ namespace MyMeetings.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addedsuscribeintomodels : IMigrationMetadata
+    public sealed partial class workmigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedsuscribeintomodels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(workmigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701161957137_added suscribe into models"; }
+            get { return "201702061108282_work migration"; }
         }
         
         string IMigrationMetadata.Source

@@ -21,15 +21,12 @@
                     <p class="publication-header">@m.PublicationName </p>
                     <div class="div-description">@m.PublicationText</div>
                 </div>
-                <div class="publicattion-div">
-                    @{
-                        foreach (var us in m.Subscribers)
-                        {
-                            return(us.FirstName + us.SurName)
-                        }
-
-                    }
-                </div>
+                <div class="publicattion-div" style="float:right">
+                    <p>
+                        @m.Subscribers.Count
+                    <img src="~/Content/images/community.png" width="25" height="18">
+                </p>
+</div>
 
 
 

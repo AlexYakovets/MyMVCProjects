@@ -3,7 +3,7 @@ namespace MyMeetings.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedsuscribeintomodels : DbMigration
+    public partial class workmigration : DbMigration
     {
         public override void Up()
         {

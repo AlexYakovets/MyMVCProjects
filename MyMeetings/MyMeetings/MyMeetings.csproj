@@ -229,17 +229,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701161957137_added suscribe into models.cs" />
-    <Compile Include="Migrations\201701161957137_added suscribe into models.Designer.cs">
-      <DependentUpon>201701161957137_added suscribe into models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701171544587_some edits in identityModel.cs" />
-    <Compile Include="Migrations\201701171544587_some edits in identityModel.Designer.cs">
-      <DependentUpon>201701171544587_some edits in identityModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701171558547_added lazy loading to identitModel.cs" />
-    <Compile Include="Migrations\201701171558547_added lazy loading to identitModel.Designer.cs">
-      <DependentUpon>201701171558547_added lazy loading to identitModel.cs</DependentUpon>
+    <Compile Include="Migrations\201702061108282_work migration.cs" />
+    <Compile Include="Migrations\201702061108282_work migration.Designer.cs">
+      <DependentUpon>201702061108282_work migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -325,6 +317,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="male-business-group-of-people_318-39598.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -405,14 +398,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701161957137_added suscribe into models.resx">
-      <DependentUpon>201701161957137_added suscribe into models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701171544587_some edits in identityModel.resx">
-      <DependentUpon>201701171544587_some edits in identityModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701171558547_added lazy loading to identitModel.resx">
-      <DependentUpon>201701171558547_added lazy loading to identitModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702061108282_work migration.resx">
+      <DependentUpon>201702061108282_work migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
