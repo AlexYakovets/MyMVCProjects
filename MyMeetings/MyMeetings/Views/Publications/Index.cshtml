@@ -13,7 +13,7 @@
         @foreach (var m in Model)
         {
             <div class="publication-div"   style="clear: both; width: 100%; height: 100%;float: left">
-          
+                <input type="hidden" value="@m.PublicationId" name="PublicationId" /> 
                 <div style="float: left">
                     <img src=@m.ImagePath class="photocard">
                 </div>
@@ -51,7 +51,7 @@
     </p>
 
     <br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Show", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>
 @section Scripts {
     @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");

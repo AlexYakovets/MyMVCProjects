@@ -10,6 +10,7 @@ namespace MyMeetings.Models
     {
         public class PartialPublication
         {
+            public string PublicationId;
             public string ImagePath;
             public string Creator;
             public DateTime DateOfPublication;

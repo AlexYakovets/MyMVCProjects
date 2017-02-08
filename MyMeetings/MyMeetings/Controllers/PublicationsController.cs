@@ -41,7 +41,7 @@ namespace MyMeetings.Controllers
                     Text = model.Text,
                     Author = currentAuthor,
                     //AuthorId = currentId,
-                    Subscriptions=new List<ApplicationUser>() {currentAuthor}
+                    Subscriptions= new List<ApplicationUser>() {currentAuthor}
                 };
                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                 string filePath =
@@ -59,7 +59,7 @@ namespace MyMeetings.Controllers
 
             return View(model);
         }
-        public ActionResult Show(int? page)
+        public ActionResult Index(int? page)
         {
             List<PublicationViewModels.PartialPublication> result = new List<PublicationViewModels.PartialPublication>();
             //if (userName.IsNullOrWhiteSpace())
@@ -86,6 +86,7 @@ namespace MyMeetings.Controllers
                 List<ApplicationUser> subscribers = new List<ApplicationUser>();
                 result.Add(new PublicationViewModels.PartialPublication()
                 {
+                    PublicationId = publ.Id,
                     PublicationName = publ.Name,
                     DateOfPublication = publ.DateTimeOfPublication,
                     ImagePath = ImagePath.Remove(0,1),
