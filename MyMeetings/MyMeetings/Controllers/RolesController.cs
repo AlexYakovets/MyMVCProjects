@@ -40,7 +40,7 @@ namespace MyMeetings.Controllers
                 {
                    return RedirectToAction("Index","Roles");
                 }
-                else ModelState.AddModelError("", "shit happens");
+                else ModelState.AddModelError("", "Errors with role creating");
             }
             return View(model);
 
@@ -70,7 +70,7 @@ namespace MyMeetings.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-                    else ModelState.AddModelError("", "again shit happens");
+                    else ModelState.AddModelError("", "aErrors with role editing");
 
                 }
             }

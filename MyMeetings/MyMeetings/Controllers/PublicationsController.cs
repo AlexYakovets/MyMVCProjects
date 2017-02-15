@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -18,7 +20,9 @@ namespace MyMeetings.Controllers
     public class PublicationsController : Controller
     {
         
-        private ApplicationDbContext _DB = new ApplicationDbContext();
+        private static ApplicationDbContext _DB = new ApplicationDbContext();
+        ApplicationUserManager userManager =
+              new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
         // GET: Publication
         public ActionResult Create()
         {
@@ -28,8 +32,7 @@ namespace MyMeetings.Controllers
         [HttpPost]
         public ActionResult Create(PublicationViewModels.CreateViewModel model)
         {
-           ApplicationUserManager userManager =
-               new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
+          
             if (ModelState.IsValid)
             {
                 string currentId = User.Identity.GetUserId();
@@ -91,7 +94,7 @@ namespace MyMeetings.Controllers
                     DateOfPublication = publ.DateTimeOfPublication,
                     ImagePath = ImagePath.Remove(0,1),
                     PublicationText = publ.Text,
-                    Subscribers = subscribers,
+                    Subscribers = publ.Subscriptions.ToList(),
                     Creator = (publ.Author.FirstName+" "+publ.Author.SurName),
                     DateOfMeet = publ.DateOfMeeting
                     //Subscribers = publ.Subscriptions.ToList()
@@ -101,6 +104,36 @@ namespace MyMeetings.Controllers
             int pagenumber = (page ?? 1);
             return View(result.ToPagedList(pagenumber, pagesize));
         }
+        [HttpGet]
+        public async Task<ActionResult> AddSubscriber(string id)
+        {
+            Publication publication = await  _DB.Publications.FirstOrDefaultAsync(p => p.Id == id);
+            var userId=User.Identity.GetUserId();
+            ApplicationUser currentUser = await userManager.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            var  ifSubscribed= publication.Subscriptions.FirstOrDefault(user => user == currentUser);
+            if (ifSubscribed == null)
+            {
+                publication.Subscriptions.Add(currentUser);
+                _DB.SaveChanges();
+            }
+            
+            
+            return RedirectToAction("Index");
+        }
+
+        //[HttpGet]
+        //public ActionResult AddSubscriber(string id)
+        //{
+        //    ViewBag.PublicationID = id;
+        //    return RedirectToAction("AddSubscribe");
+        //}
+
+        //[HttpPost]
+        //public ActionResult AddSubscribe()
+        //{
+        //    var publication = _DB.Publications.FirstOrDefaultAsync(p => p.Id == ViewBag.p);
+        //    return RedirectToAction("Index","Home");
+        //}
 
     }
 }
