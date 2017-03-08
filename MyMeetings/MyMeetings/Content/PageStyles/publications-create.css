@@ -3,7 +3,8 @@
     overflow: hidden;
     font-size: 1em;        /* example */
     height: 2em;           /* example */
-    line-height: 2em       /* the same as height */
+    line-height: 2em;
+    width:30%;     /* the same as height */
 }
 .file_upload > button{
     float: right;
@@ -63,4 +64,6 @@
 .file_upload:active > button{
     background: #5d00b3;
     box-shadow: 0 0 3px rgba(0,0,0,0.3) inset
+}
+.form-control {
 }

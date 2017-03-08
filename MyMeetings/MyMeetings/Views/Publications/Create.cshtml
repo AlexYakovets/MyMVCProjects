@@ -16,17 +16,17 @@
             <p>Choose image</p>
         </div>*@
         @* Костыль для загрузки данных*@
-        <div class="flex-container-row" style="justify-content:space-between">
-            <div class="file_upload"style="width: 30%">
+        <div class="flex-container-row" >
+            <div class="file_upload">
+            @*<div class="file_upload">*@
                 <button type="button">Выбрать</button>
                 <div>Файл не выбран</div>
-                <input type="file" id="imagefile" name="imagefile"/>
+                <input type="file" id="imagefile" name="imagefile" />
             </div>
-            @*  *@
-            <div class="form-group">
-                @Html.LabelFor(m => m.PublicationName, new {@class = "col-md-2 control-label"})
+            <div class="form-group" >
+                @Html.LabelFor(m => m.PublicationName, new {@class = "col-md-2 control-label", @style = "min-width:40%" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.PublicationName, new {@class = "form-control"})
+                    @Html.TextBoxFor(m => m.PublicationName, new {@class = "form-control",@style="min-width:60%"})
                     @Html.ValidationMessageFor(m => m.PublicationName)
                 </div>
             </div>
