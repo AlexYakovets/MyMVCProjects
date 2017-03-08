@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<MyMeetings.Models.PublicationViewModels.PartialPublication>
+@using Microsoft.AspNet.Identity
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Publications";
@@ -12,8 +13,8 @@
 
         @foreach (var m in Model)
         {
-            <div class="publication-div"   style="clear: both; width: 100%; height: 100%;float: left">
-                <input type="hidden" value="@m.PublicationId" name="PublicationId" /> 
+            <div class="publication-div" style="clear: both; width: 100%; height: 100%; float: left">
+                <input type="hidden" value="@m.PublicationId" name="PublicationId" />
                 <div style="float: left">
                     <img src=@m.ImagePath class="photocard">
                 </div>
@@ -21,12 +22,12 @@
                     <p class="publication-header">@m.PublicationName </p>
                     <div class="div-description">@m.PublicationText</div>
                 </div>
-                <div class="publicattion-div" style="float:right">
+                <div class="publicattion-div" style="float: right">
                     <p>
                         @m.Subscribers.Count
-                    <img src="~/Content/images/community.png" width="25" height="18">
-                </p>
-</div>
+                        <img src="~/Content/images/community.png" width="25" height="18">
+                    </p>
+                </div>
 
 
 
@@ -34,13 +35,24 @@
                     <p class="publication-text">Создал @m.Creator </p>
                     <p class="publication-text">Опубликовано @m.DateOfPublication </p>
                 </div>
+                @if (!@m.IsSubscribedUser)
+                {
                     <div style="float: right">
                         <a class="btn btn-default publication-button" href="/Publications/AddSubscriber/@m.PublicationId" style="background-color: #b8860b">Subscribe</a>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div style="float: right">
+                        <a class="btn btn-default publication-button" href="/Publications/DeleteSubscriber/@m.PublicationId" style="background-color: #b22222">Subscribe</a>
+                    </div>
 
-           
-               
+                }
+            </div>
+
+
+
+
         }
 
     <label class="checkbox-inline" id="list-of-roles">

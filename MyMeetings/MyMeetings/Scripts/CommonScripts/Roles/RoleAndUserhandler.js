@@ -24,7 +24,7 @@
             arr.push(role);
         });
         var data = JSON.stringify(arr);
-        console.log(data);
+        //console.log(data);
         $.ajax({
             type: "PUT",
             data: data,

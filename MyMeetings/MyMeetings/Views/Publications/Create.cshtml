@@ -10,43 +10,51 @@
     @Html.AntiForgeryToken()
     <h4>Create new meeting</h4>
     <hr/>
-    <div class="form-group" style="float:left">
-        <div class="label-image-file">
+    <div class="flex-container-column">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="label-image-file">
             <p>Choose image</p>
-        </div>
-        <input type="file" id="imagefile" name="imagefile" />
-    </div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="all-groups">
-    <div class="form-group">
-        @Html.LabelFor(m => m.PublicationName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextBoxFor(m => m.PublicationName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.PublicationName)
-        </div>
-    </div>
-        <div class="form-group">
-            <div >
-            @Html.LabelFor(m => m.Text, new {@class = "col-md-2 control-label"})
-                @*@Html.TextBoxFor(m => m.Text, new { @class = "form-control" })*@
-                <textarea name="text" style="width: 60%" rows="10" @*cols="50"*@>Enter text of description here
-            </textarea>
-                @Html.ValidationMessageFor(m => m.Text)
+        </div>*@
+        @* Костыль для загрузки данных*@
+        <div class="flex-container-row" style="justify-content:space-between">
+            <div class="file_upload"style="width: 30%">
+                <button type="button">Выбрать</button>
+                <div>Файл не выбран</div>
+                <input type="file" id="imagefile" name="imagefile"/>
+            </div>
+            @*  *@
+            <div class="form-group">
+                @Html.LabelFor(m => m.PublicationName, new {@class = "col-md-2 control-label"})
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.PublicationName, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.PublicationName)
+                </div>
             </div>
         </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateOfMeeting, htmlAttributes: new {@class = "control-label col-md-2"})
-        <div class="col-md-6">
-            @Html.EditorFor(model => model.DateOfMeeting, new {htmlAttributes = new {@class = "form-control"}})
-            @Html.ValidationMessageFor(model => model.DateOfMeeting, "", new {@class = "text-danger"})
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create"/>
-        </div>
-    </div>
-        </div>
+               
+                    <div>
+                        @Html.LabelFor(m => m.Text, new { @class = "col-md-2 control-label" })
+                        @*@Html.TextBoxFor(m => m.Text, new { @class = "form-control" })*@
+                        <textarea name="text" style="width: 60%" rows="10" @*cols="50"*@>
+                            Enter text of description here
+                        </textarea>
+                        @Html.ValidationMessageFor(m => m.Text)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateOfMeeting, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.DateOfMeeting, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateOfMeeting, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Create" />
+                    </div>
+                </div>
+   
+ 
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -54,6 +62,8 @@
     @Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
     @Scripts.Render("~/scripts/jquery-ui-1.12.1.min.js")
     @Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")
+    @*@Scripts.Render("~/scripts/commonscripts/publications/inputFileFiller.js")*@
+    @Styles.Render("~/content/pagestyles/publications-create.css")
     @Styles.Render("~/content/datePicker.css");
     @Styles.Render("~/content/Site.css");
     }

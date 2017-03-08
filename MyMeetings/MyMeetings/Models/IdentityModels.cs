@@ -18,7 +18,7 @@ namespace MyMeetings.Models
         public DateTime DateOfBirth { get; set; }
         public DateTime DateOfRegistration { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
-        public ICollection<Publication> Subscriptions { get; set; }
+        public virtual ICollection<Publication> Subscriptions { get; set; }
 
         public ApplicationUser()
         {

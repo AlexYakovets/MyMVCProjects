@@ -233,6 +233,14 @@
     <Compile Include="Migrations\201702061108282_work migration.Designer.cs">
       <DependentUpon>201702061108282_work migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702170623377_edits in identity models.cs" />
+    <Compile Include="Migrations\201702170623377_edits in identity models.Designer.cs">
+      <DependentUpon>201702170623377_edits in identity models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702170701166_edits in identity models2.cs" />
+    <Compile Include="Migrations\201702170701166_edits in identity models2.Designer.cs">
+      <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -261,6 +269,7 @@
     <Content Include="Content\images\UserInfo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PageStyles\manage-index-style.css" />
+    <Content Include="Content\PageStyles\publications-create.css" />
     <Content Include="Content\PageStyles\publications-show.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -321,6 +330,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\CommonScripts\Manage\ValidateFileFormat.js" />
+    <Content Include="Scripts\CommonScripts\Publications\InputFileFiller.js" />
     <Content Include="Scripts\CommonScripts\Roles\RoleAndUserhandler.js" />
     <Content Include="Scripts\CommonScripts\Shared\DatePickerForInputData.js" />
     <Content Include="Scripts\CommonScripts\TestAjax.js" />
@@ -399,6 +409,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702061108282_work migration.resx">
       <DependentUpon>201702061108282_work migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170623377_edits in identity models.resx">
+      <DependentUpon>201702170623377_edits in identity models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170701166_edits in identity models2.resx">
+      <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

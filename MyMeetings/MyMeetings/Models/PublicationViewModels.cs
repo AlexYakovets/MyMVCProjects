@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Security.Principal;
+using Microsoft.AspNet.Identity;
 
 namespace MyMeetings.Models
 {
@@ -19,6 +23,18 @@ namespace MyMeetings.Models
             public List<ApplicationUser> Subscribers;
             public string PublicationText;
 
+            public bool IsSubscribedUser
+            {
+                get
+                {
+                    string userId = ClaimsPrincipal.Current.Identity.GetUserId();
+                    return Subscribers.Any(user=>user.Id==userId);
+                    //var Subscribings =
+                    //    this.Subscribers.FirstOrDefault(user => user.Id == ClaimsPrincipal.Current.Identity.GetUserId());
+                    //return Subscribings != null;
+
+                }
+            }
         }
         public class CreateViewModel
         {

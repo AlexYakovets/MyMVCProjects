@@ -20,7 +20,7 @@ namespace MyMeetings.Models
         public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }
         [InverseProperty("Subscriptions")]
-        public ICollection<ApplicationUser> Subscriptions { get; set; }
+        public virtual ICollection<ApplicationUser> Subscriptions { get; set; }
 
         public Publication()
         {

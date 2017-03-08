@@ -19,10 +19,11 @@ namespace MyMeetings.Controllers
     [Authorize]
     public class PublicationsController : Controller
     {
-        
-        private static ApplicationDbContext _DB = new ApplicationDbContext();
-        ApplicationUserManager userManager =
-              new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
+
+        //Как мнициализировать через не статик поле
+        //private ApplicationDbContext _DB = new ApplicationDbContext();
+        //private ApplicationUserManager userManager =
+        //      new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
         // GET: Publication
         public ActionResult Create()
         {
@@ -32,7 +33,9 @@ namespace MyMeetings.Controllers
         [HttpPost]
         public ActionResult Create(PublicationViewModels.CreateViewModel model)
         {
-          
+            ApplicationDbContext _DB = new ApplicationDbContext();
+            ApplicationUserManager userManager =
+                  new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
             if (ModelState.IsValid)
             {
                 string currentId = User.Identity.GetUserId();
@@ -64,6 +67,9 @@ namespace MyMeetings.Controllers
         }
         public ActionResult Index(int? page)
         {
+            ApplicationDbContext _DB = new ApplicationDbContext();
+            //ApplicationUserManager userManager =
+            //      new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
             List<PublicationViewModels.PartialPublication> result = new List<PublicationViewModels.PartialPublication>();
             //if (userName.IsNullOrWhiteSpace())
             //{
@@ -76,7 +82,7 @@ namespace MyMeetings.Controllers
             foreach (var publ in _DB.Publications)
             {
                 string ImagePath;
-                if (System.IO.File.Exists(publ.ImagePath) == true)
+                if (System.IO.File.Exists(publ.ImagePath))
                 {
                     ImagePath = ConfigurationManager.AppSettings["PublicationAvatarsPath"] +
                                 publ.Id + ".png";
@@ -107,6 +113,9 @@ namespace MyMeetings.Controllers
         [HttpGet]
         public async Task<ActionResult> AddSubscriber(string id)
         {
+            ApplicationDbContext _DB = new ApplicationDbContext();
+            ApplicationUserManager userManager =
+                  new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
             Publication publication = await  _DB.Publications.FirstOrDefaultAsync(p => p.Id == id);
             var userId=User.Identity.GetUserId();
             ApplicationUser currentUser = await userManager.Users.FirstOrDefaultAsync(user => user.Id == userId);
@@ -119,6 +128,30 @@ namespace MyMeetings.Controllers
             
             
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<ActionResult> DeleteSubscriber(string id)
+        {
+            ApplicationDbContext _DB = new ApplicationDbContext();
+            ApplicationUserManager userManager =
+                  new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
+            Publication publication = await _DB.Publications.FirstOrDefaultAsync(p => p.Id == id);
+            var userId = User.Identity.GetUserId();
+            ApplicationUser currentUser = await userManager.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            var ifSubscribed = publication.Subscriptions.FirstOrDefault(user => user == currentUser);
+            if (ifSubscribed != null)
+            {
+                publication.Subscriptions.Remove(currentUser);
+                _DB.SaveChanges();
+            }
+
+           
+            return RedirectToAction("Index");
+        }
+
+        public bool IsSubscribedUser(ApplicationUser user)
+        {
+            return true;
         }
 
         //[HttpGet]
