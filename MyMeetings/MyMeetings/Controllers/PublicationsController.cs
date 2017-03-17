@@ -20,11 +20,6 @@ namespace MyMeetings.Controllers
     public class PublicationsController : Controller
     {
 
-        //Как мнициализировать через не статик поле
-        //private ApplicationDbContext _DB = new ApplicationDbContext();
-        //private ApplicationUserManager userManager =
-        //      new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
-        // GET: Publication
         public ActionResult Create()
         {
             return View();

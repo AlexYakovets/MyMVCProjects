@@ -218,6 +218,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Image.cs" />
@@ -241,10 +242,20 @@
     <Compile Include="Migrations\201702170701166_edits in identity models2.Designer.cs">
       <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703150931433_added Categories.cs" />
+    <Compile Include="Migrations\201703150931433_added Categories.Designer.cs">
+      <DependentUpon>201703150931433_added Categories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703160643258_added Publications categories.cs" />
+    <Compile Include="Migrations\201703160643258_added Publications categories.Designer.cs">
+      <DependentUpon>201703160643258_added Publications categories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\PublicationCategory.cs" />
+    <Compile Include="Models\CategoriesViewModels.cs" />
     <Compile Include="Models\PublicationModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -390,17 +401,22 @@
     <Content Include="Views\Find\FindUsers.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Roles\AddToUser.cshtml" />
     <Content Include="Views\Moderation\ShowUsers.cshtml" />
     <Content Include="Views\Moderation\UserDetails.cshtml" />
     <Content Include="Views\Manage\LoadImage.cshtml" />
     <Content Include="Views\Publications\Create.cshtml" />
     <Content Include="Views\Publications\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CategoriesViewModels\" />
     <Folder Include="Views\ModerationViewModels\" />
+    <Folder Include="Views\PublicationCategories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -415,6 +431,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702170701166_edits in identity models2.resx">
       <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703150931433_added Categories.resx">
+      <DependentUpon>201703150931433_added Categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703160643258_added Publications categories.resx">
+      <DependentUpon>201703160643258_added Publications categories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

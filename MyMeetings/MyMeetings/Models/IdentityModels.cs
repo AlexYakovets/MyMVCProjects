@@ -39,6 +39,7 @@ namespace MyMeetings.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<PublicationCategory> PublicationCategories { get; set; }
         public DbSet<Publication> Publications { get; set; }
         public ApplicationDbContext()
             : base("MyMeetings", throwIfV1Schema: false)
