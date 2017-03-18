@@ -7,13 +7,13 @@ namespace MyMeetings.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class editsinidentitymodels : IMigrationMetadata
+    public sealed partial class homemigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(editsinidentitymodels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(homemigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702170623377_edits in identity models"; }
+            get { return "201703171806198_home migration"; }
         }
         
         string IMigrationMetadata.Source

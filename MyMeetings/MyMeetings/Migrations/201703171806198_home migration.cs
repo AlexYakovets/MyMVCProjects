@@ -3,7 +3,7 @@ namespace MyMeetings.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedPublicationscategories : DbMigration
+    public partial class homemigration : DbMigration
     {
         public override void Up()
         {

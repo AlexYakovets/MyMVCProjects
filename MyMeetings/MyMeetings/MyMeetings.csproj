@@ -230,25 +230,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702061108282_work migration.cs" />
-    <Compile Include="Migrations\201702061108282_work migration.Designer.cs">
-      <DependentUpon>201702061108282_work migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702170623377_edits in identity models.cs" />
-    <Compile Include="Migrations\201702170623377_edits in identity models.Designer.cs">
-      <DependentUpon>201702170623377_edits in identity models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702170701166_edits in identity models2.cs" />
-    <Compile Include="Migrations\201702170701166_edits in identity models2.Designer.cs">
-      <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703150931433_added Categories.cs" />
-    <Compile Include="Migrations\201703150931433_added Categories.Designer.cs">
-      <DependentUpon>201703150931433_added Categories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703160643258_added Publications categories.cs" />
-    <Compile Include="Migrations\201703160643258_added Publications categories.Designer.cs">
-      <DependentUpon>201703160643258_added Publications categories.cs</DependentUpon>
+    <Compile Include="Migrations\201703171806198_home migration.cs" />
+    <Compile Include="Migrations\201703171806198_home migration.Designer.cs">
+      <DependentUpon>201703171806198_home migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -423,20 +407,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702061108282_work migration.resx">
-      <DependentUpon>201702061108282_work migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702170623377_edits in identity models.resx">
-      <DependentUpon>201702170623377_edits in identity models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702170701166_edits in identity models2.resx">
-      <DependentUpon>201702170701166_edits in identity models2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703150931433_added Categories.resx">
-      <DependentUpon>201703150931433_added Categories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703160643258_added Publications categories.resx">
-      <DependentUpon>201703160643258_added Publications categories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703171806198_home migration.resx">
+      <DependentUpon>201703171806198_home migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
