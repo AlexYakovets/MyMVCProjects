@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Create</h2>
 @using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
@@ -23,13 +24,22 @@
                 <div>Файл не выбран</div>
                 <input type="file" id="imagefile" name="imagefile" />
             </div>
-            <div class="form-group" >
-                @Html.LabelFor(m => m.PublicationName, new {@class = "col-md-2 control-label", @style = "min-width:40%" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.PublicationName, new {@class = "col-md-2 control-label", @style = "min-width:40%"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.PublicationName, new {@class = "form-control",@style="min-width:60%"})
+                    @Html.TextBoxFor(m => m.PublicationName, new {@class = "form-control", @style = "min-width:60%"})
                     @Html.ValidationMessageFor(m => m.PublicationName)
                 </div>
             </div>
+            <div><label for="speed">Select a speed</label>
+<select name="speed" id="speed">
+    <option selected="selected">Without category</option>
+    @foreach (var item in ViewBag.PublicationsCategories)
+        {
+            <option>@item.Name</option>
+
+        }
+</select></div>
         </div>
                
                     <div>
@@ -48,22 +58,28 @@
                         @Html.ValidationMessageFor(model => model.DateOfMeeting, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Create" />
-                    </div>
-                </div>
-   
- 
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
-    @Scripts.Render("~/scripts/jquery-ui-1.12.1.min.js")
-    @Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")
-    @*@Scripts.Render("~/scripts/commonscripts/publications/inputFileFiller.js")*@
-    @Styles.Render("~/content/pagestyles/publications-create.css")
-    @Styles.Render("~/content/datePicker.css");
-    @Styles.Render("~/content/Site.css");
-    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Create"/>
+        </div>
+    </div>
+        }
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+            @Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
+            @Scripts.Render("~/scripts/jquery-ui-1.12.1.min.js")
+            @Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")
+           @Scripts.Render("https://code.jquery.com/jquery-1.12.4.js")
+             @Scripts.Render("https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+            @*@Scripts.Render("~/scripts/commonscripts/publications/inputFileFiller.js")*@
+            @Styles.Render("~/content/pagestyles/publications-create.css")
+            @Styles.Render("~/content/datePicker.css");
+            @Styles.Render("~/content/Site.css");
+            @Styles.Render("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");<script>
+    $(function() {
+        $("#speed").selectmenu();
+    });
+</script>
+        }
+

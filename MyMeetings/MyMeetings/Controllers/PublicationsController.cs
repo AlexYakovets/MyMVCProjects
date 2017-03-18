@@ -19,16 +19,17 @@ namespace MyMeetings.Controllers
     [Authorize]
     public class PublicationsController : Controller
     {
-
+        private ApplicationDbContext _DB = new ApplicationDbContext();
         public ActionResult Create()
         {
+            ViewBag.PublicationsCategories = _DB.PublicationCategories.ToList();
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(PublicationViewModels.CreateViewModel model)
         {
-            ApplicationDbContext _DB = new ApplicationDbContext();
+           
             ApplicationUserManager userManager =
                   new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
             if (ModelState.IsValid)
