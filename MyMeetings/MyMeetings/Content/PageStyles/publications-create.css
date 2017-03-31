@@ -65,5 +65,15 @@
     background: #5d00b3;
     box-shadow: 0 0 3px rgba(0,0,0,0.3) inset
 }
-.form-control {
+.input {
+  /*width: 60%;*/ 
+  border-radius: 4px;
+  box-shadow: 0 0 4px #d2691e;
+}
+.ui-selectmenu-button {
+     border-radius: 4px;
+  box-shadow: 0 0 4px #d2691e;
+}
+.flex-container-column textarea {
+     width: 60%;
 }

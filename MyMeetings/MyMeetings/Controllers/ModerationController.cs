@@ -15,11 +15,12 @@ using PagedList;
 
 namespace MyMeetings.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ModerationController : Controller
     {
         ApplicationUserManager UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         //POST
-        [Authorize(Roles = "Admin")]
+       
         public ActionResult ShowUsers(string userName,int? page)
         {
             List<ApplicationUser> result = new List<ApplicationUser>();

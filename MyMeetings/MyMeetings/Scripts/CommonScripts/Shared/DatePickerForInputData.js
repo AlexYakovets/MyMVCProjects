@@ -35,5 +35,3 @@
                    return ok;
                });
        });
-//<script>
-//    document.getElementById("DateOfBirth").setAttribute("autocomplete", "section-red on");

@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Principal;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 
 namespace MyMeetings.Models
@@ -36,7 +38,7 @@ namespace MyMeetings.Models
                 }
             }
         }
-        public class CreateViewModel
+        public class CreatePublicationModelView
         {
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
@@ -52,6 +54,14 @@ namespace MyMeetings.Models
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
             public DateTime DateOfMeeting { get; set; }
+
+            [Display(Name = "Category")]
+            public string Category { get; set; }
+
+            public SelectList Categories { get; set; }
+
+
+
         }
     }
     }

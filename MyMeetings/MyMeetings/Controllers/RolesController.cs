@@ -11,13 +11,14 @@ using MyMeetings.Models;
 
 namespace MyMeetings.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private ApplicationRoleManager RoleManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); }
         }
-
+       
         public ActionResult Index()
         {
             return View(RoleManager.Roles);
