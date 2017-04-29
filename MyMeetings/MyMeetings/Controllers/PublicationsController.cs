@@ -89,12 +89,12 @@ using PagedList;
                     {
                         PublicationId = publ.Id,
                         PublicationName = publ.Name,
-                        DateOfPublication = publ.DateTimeOfPublication,
+                        DateOfPublication = publ.DateTimeOfPublication.ToString(),
                         ImagePath = ImagePath.Remove(0, 1),
                         PublicationText = publ.Text,
                         Subscribers = publ.Subscriptions.ToList(),
                         Creator = (publ.Author.FirstName + " " + publ.Author.SurName),
-                        DateOfMeet = publ.DateOfMeeting
+                        DateOfMeet = publ.DateOfMeeting.ToString("MM/dd/yyyy HH:mm:ss")
                         //Subscribers = publ.Subscriptions.ToList()
                     });
                 }

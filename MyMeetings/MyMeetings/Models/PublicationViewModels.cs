@@ -19,9 +19,9 @@ namespace MyMeetings.Models
             public string PublicationId;
             public string ImagePath;
             public string Creator;
-            public DateTime DateOfPublication;
+            public string DateOfPublication;
             public string PublicationName;
-            public DateTime DateOfMeet;
+            public string DateOfMeet;
             public List<ApplicationUser> Subscribers;
             public string PublicationText;
 
