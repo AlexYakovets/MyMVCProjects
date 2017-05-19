@@ -3,11 +3,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+@Scripts.Render("~/Scripts/jquery-1.12.4.js")
 <h2>Create</h2>
-@using (Html.BeginForm("Create", "Publications", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
+    <head></head>
     @Html.AntiForgeryToken()
     <h4>Create new meeting</h4>
     <hr/>
@@ -37,11 +37,13 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label", @style = "min-width:40%" })
+                        @Html.LabelFor(m => m.CategoryID, new { @class = "col-md-2 control-label", @style = "min-width:40%" })
                         <div class="col-md-4">
-                            @Html.DropDownListFor(m => m.Category, Model.Categories, "-- Select Status --", new { @id = "category", @class = "input" })
-                            @Html.ValidationMessageFor(m => m.Category)
+                           @*@Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as SelectList, "-- Select Status --", new { @id = "category", @class = "input" })*@
+                           @Html.DropDownListFor(m => m.CategoryID, Model.Categories, "-- Select Status --", new { @id = "category", @class = "input" })
+                            @Html.ValidationMessageFor(m => m.CategoryID)
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -57,7 +59,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DateOfMeeting, htmlAttributes: new {@class = "control-label col-md-2"})
         <div class="col-md-6">
-            @Html.EditorFor(model => model.DateOfMeeting, new {htmlAttributes = new {@class = "form-control input" } })
+            @Html.EditorFor(model => model.DateOfMeeting, new {htmlAttributes = new {@class = "form-control input"} })
             @Html.ValidationMessageFor(model => model.DateOfMeeting, "", new {@class = "text-danger"})
         </div>
     </div>
@@ -65,25 +67,59 @@
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Create"/>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker1'>
+                            <input type='text' class="form-control"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            @*<script>
+                                $(function () {
+                                    $('#datetimepicker1').datetimepicker();
+                                });
+                            </script>*@
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
     </div>
 }
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
-    @Scripts.Render("~/scripts/jquery-ui-1.12.1.min.js")
-    @Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")
+@Scripts.Render("~/Scripts/jquery-1.12.4.js")
+@Scripts.Render("~/Scripts/CommonScripts/Publications/DatetimepickerInitializer.js");
+@*@Scripts.Render("~/bundles/jqueryval.js")
+@Scripts.Render("~/bundles/jquery.unobtrusive-ajax.js")*@
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
+@Styles.Render("~/Content/bootstrap-datetimepicker-build.css")
+    @*@Scripts.Render("~/scripts/commonScripts/shared/DatePickerForInputData.js")*@
     @Scripts.Render("~/Scripts/CommonScripts/Publications/FileNameForInputFileWrapper.js");
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @Styles.Render("~/content/pagestyles/publications-create.css")
     @Styles.Render("~/content/datePicker.css");
     @Styles.Render("~/content/Site.css");
     @Styles.Render("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
-
     <script>
         $(function() {
             $("#category").selectmenu();
         });
     </script>
-    
+@*<script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+</script>*@
+
+    @*<script>
+        $(function () {
+            $("#datetimepicker").datetimepicker();
+        });
+    </script>*@
 }
  

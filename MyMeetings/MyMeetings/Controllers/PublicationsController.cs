@@ -25,8 +25,11 @@ using PagedList;
             public ActionResult Create()
             {
                 PublicationViewModels.CreatePublicationModelView model = new PublicationViewModels.CreatePublicationModelView();
-                model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
-                return View(model);
+            //model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
+         
+            //ViewBag.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
+            ViewBag.CategoryID = new SelectList(_DB.PublicationCategories, "Id", "Name");
+            return View(model);
             }
 
             [HttpPost]
@@ -46,7 +49,7 @@ using PagedList;
                         DateOfMeeting = model.DateOfMeeting,
                         Text = model.Text,
                         Author = currentAuthor,
-                        Category = _DB.PublicationCategories.FirstOrDefault(p=>p.Id==model.Category),
+                        //Category = _DB.PublicationCategories.FirstOrDefault(p=>p.Id==model.Category),
                         Subscriptions = new List<ApplicationUser>() {currentAuthor}
                     };
                     HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
@@ -94,7 +97,7 @@ using PagedList;
                         PublicationText = publ.Text,
                         Subscribers = publ.Subscriptions.ToList(),
                         Creator = (publ.Author.FirstName + " " + publ.Author.SurName),
-                        DateOfMeet = publ.DateOfMeeting.ToString("MM/dd/yyyy HH:mm:ss")
+                        DateOfMeet = publ.DateOfMeeting.ToString(@"MM\/dd\/yyyy HH:mm:ss")
                         //Subscribers = publ.Subscriptions.ToList()
                     });
                 }
