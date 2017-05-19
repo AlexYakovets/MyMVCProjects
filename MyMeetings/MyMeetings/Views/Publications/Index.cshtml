@@ -14,10 +14,9 @@
         @foreach (var m in Model)
         {
             <div class="publication-div" style="clear: both; width: 100%; height: 100%; float: left">
-                <input type="hidden" value="@m.PublicationId" name="PublicationId" />
-                <div class="timer">
-                    <input type="hidden" value="@m.DateOfMeet" class="DateTimeOfMeet" />
-                    @Scripts.Render("~/Scripts/CommonScripts/Publications/FlipCountDownInitializer.js");
+                @*<input type="hidden" value="@m.PublicationId" class="PublicationId" />*@
+                <div class="timer" value="@m.PublicationId">
+                    <input type="hidden" value="@m.DateOfMeet"id="@m.PublicationId"/>
                 </div>
                 <div style="float: left">
                  
@@ -72,15 +71,15 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/scripts/commonscripts/Shared/Timer/jquery.min.js");
+    @Scripts.Render("~/Scripts/CommonScripts/Publications/FlipCountDownInitializer.js");
     @Scripts.Render("~/scripts/commonscripts/Shared/Timer/jquery.flipcountdown.js");
     @Styles.Render("~/scripts/commonscripts/Shared/Timer/jquery.flipcountdown.css");
     @Scripts.Render("~/Scripts/CommonScripts/Manage/ValidateFileFormat.js");
-    @Scripts.Render("~/Scripts/CommonScripts/Publications/FlipCountDownInitializer.js");
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Scripts.Render("~/scripts/commonscripts/roles/roleanduserhandler.js")
-    @Styles.Render("~/Content/PagedList.css")
-    @Styles.Render("~/content/pagestyles/publications-show.css")
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js");
+    @Scripts.Render("~/scripts/commonscripts/roles/roleanduserhandler.js");
+    @Styles.Render("~/Content/PagedList.css");
+    @Styles.Render("~/content/pagestyles/publications-show.css");
 
 
 }
