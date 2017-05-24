@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMeetings.Models
 {
@@ -54,11 +55,12 @@ namespace MyMeetings.Models
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
             public DateTime DateOfMeeting { get; set; }
-
+      
             [Display(Name = "Category")]
-            public string Category { get; set; }
-
+            public int? CategoryID { get; set; }
+            [NotMapped]
             public SelectList Categories { get; set; }
+
 
 
 
