@@ -10,6 +10,7 @@ namespace MyMeetings.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "MyMeetings.Models.ApplicationDbContext";
         }
 
         protected override void Seed(MyMeetings.Models.ApplicationDbContext context)

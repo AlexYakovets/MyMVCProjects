@@ -28,7 +28,7 @@ using PagedList;
             //model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
          
             //ViewBag.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
-            ViewBag.CategoryID = new SelectList(_DB.PublicationCategories, "Id", "Name");
+            model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
             return View(model);
             }
 
@@ -49,7 +49,7 @@ using PagedList;
                         DateOfMeeting = model.DateOfMeeting,
                         Text = model.Text,
                         Author = currentAuthor,
-                        //Category = _DB.PublicationCategories.FirstOrDefault(p=>p.Id==model.Category),
+                        Category = _DB.PublicationCategories.FirstOrDefault(p=>p.Id==model.CategoryID.ToString()),
                         Subscriptions = new List<ApplicationUser>() {currentAuthor}
                     };
                     HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;

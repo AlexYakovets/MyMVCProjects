@@ -7,13 +7,13 @@ namespace MyMeetings.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Homecommitmigration : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Homecommitmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705221516102_Home-commit-migration"; }
+            get { return "201705241652565_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

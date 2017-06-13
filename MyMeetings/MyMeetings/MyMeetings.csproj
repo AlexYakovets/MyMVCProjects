@@ -230,9 +230,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705221516102_Home-commit-migration.cs" />
-    <Compile Include="Migrations\201705221516102_Home-commit-migration.Designer.cs">
-      <DependentUpon>201705221516102_Home-commit-migration.cs</DependentUpon>
+    <Compile Include="Migrations\201705241652565_InitialCreate.cs" />
+    <Compile Include="Migrations\201705241652565_InitialCreate.Designer.cs">
+      <DependentUpon>201705241652565_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705250835050_publication datemeeting fixed.cs" />
+    <Compile Include="Migrations\201705250835050_publication datemeeting fixed.Designer.cs">
+      <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -266,6 +270,7 @@
     <Content Include="Content\PageStyles\manage-index-style.css" />
     <Content Include="Content\PageStyles\publications-create.css" />
     <Content Include="Content\PageStyles\publications-show.css" />
+    <Content Include="Content\ucss-file-upload.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -558,8 +563,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705221516102_Home-commit-migration.resx">
-      <DependentUpon>201705221516102_Home-commit-migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705241652565_InitialCreate.resx">
+      <DependentUpon>201705241652565_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705250835050_publication datemeeting fixed.resx">
+      <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
