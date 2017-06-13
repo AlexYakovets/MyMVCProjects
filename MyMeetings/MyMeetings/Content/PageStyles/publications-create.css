@@ -1,18 +1,18 @@
 ﻿.file_upload{
     position: relative;
     overflow: hidden;
-    font-size: 1em;        /* example */
-    height: 2em;           /* example */
+    font-size: 1em;        
+    height: 2em;           
     line-height: 2em;
-    width:30%;     /* the same as height */                 
+    width:30%;                     
 }
 .file_upload > button{
     float: right;
-    width: 8em;            /* example */
+    width: 8em;           
     height: 100%
 }
 .file_upload > div{
-    padding-left: 1em      /* example */
+    padding-left: 1em    
 }
 @media only screen and ( max-width: 500px ){  /* for mobile devices text is hidden */
     .file_upload > div{
@@ -66,7 +66,6 @@
     box-shadow: 0 0 3px rgba(0,0,0,0.3) inset
 }
 .input {
-  /*width: 60%;*/ 
   border-radius: 4px;
   box-shadow: 0 0 4px #d2691e;
 }
@@ -74,7 +73,4 @@
      border-radius: 4px;
   box-shadow: 0 0 4px #d2691e;
 }
-.flex-container-column textarea {
-     width: 60%;
-}
-/*Styles for preview image*/
+

@@ -3,7 +3,7 @@ namespace MyMeetings.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Homecommitmigration : DbMigration
+    public partial class publicationdatemeetingfixed : DbMigration
     {
         public override void Up()
         {

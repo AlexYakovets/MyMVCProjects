@@ -52,12 +52,12 @@ namespace MyMeetings.Models
             public string Text { get; set; }
 
             [Display(Name = "Date of meeting")]
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+            [DataType(DataType.DateTime)]
+            //[DisplayFormat(DataFormatString = "{0:MM'/'dd'/'yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
             public DateTime DateOfMeeting { get; set; }
       
             [Display(Name = "Category")]
-            public int? CategoryID { get; set; }
+            public string CategoryID { get; set; }
             [NotMapped]
             public SelectList Categories { get; set; }
 
