@@ -39,34 +39,36 @@ using PagedList;
 
               ApplicationUserManager userManager =
                     new ApplicationUserManager(new UserStore<ApplicationUser>(_DB));
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                string currentId = User.Identity.GetUserId();
+                ApplicationUser currentAuthor = userManager.Users.FirstOrDefault(user => user.Id == currentId);
+                var publication = new Publication()
                 {
-                    string currentId = User.Identity.GetUserId();
-                    ApplicationUser currentAuthor = userManager.Users.FirstOrDefault(user => user.Id == currentId);
-                    var publication = new Publication()
-                    {
-                        Name = model.PublicationName,
-                        DateOfMeeting = model.DateOfMeeting,
-                        Text = model.Text,
-                        Author = currentAuthor,
-                        Category = _DB.PublicationCategories.FirstOrDefault(p=>p.Id==model.CategoryID.ToString()),
-                        Subscriptions = new List<ApplicationUser>() {currentAuthor}
-                    };
-                    HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
-                    string filePath =
-                        System.Web.HttpContext.Current.Server.MapPath(
-                            ConfigurationManager.AppSettings["PublicationAvatarsPath"] + "\\" +
-                            publication.Id + ".png");
-                    Image.SaveImage(hpf, filePath, 100, 100);
-                    publication.ImagePath = filePath;
+                    Name = model.PublicationName,
+                    DateOfMeeting = model.DateOfMeeting,
+                    Text = model.Text,
+                    Author = currentAuthor,
+                    Category = _DB.PublicationCategories.FirstOrDefault(p => p.Id == model.CategoryID.ToString()),
+                    Subscriptions = new List<ApplicationUser>() { currentAuthor }
+                };
+                HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
+                string filePath =
+                    System.Web.HttpContext.Current.Server.MapPath(
+                        ConfigurationManager.AppSettings["PublicationAvatarsPath"] + "\\" +
+                        publication.Id + ".png");
+                Image.SaveImage(hpf, filePath, 100, 100);
+                publication.ImagePath = filePath;
 
-                    _DB.Publications.Add(publication);
-                    _DB.SaveChanges();
-                    return RedirectToAction("Index", "Home");
-                }
-                //AddErrors(result);
-
-                return View(model);
+                _DB.Publications.Add(publication);
+                _DB.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
+            }
+            return View(model);
             }
 
             public ActionResult Index(int? page)

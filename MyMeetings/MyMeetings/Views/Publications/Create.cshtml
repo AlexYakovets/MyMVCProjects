@@ -4,57 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/Scripts/jquery-1.12.4.js")
-<h2>Create</h2>
+<h2>Create new meeting</h2>
 @using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create new meeting</h4>
     <hr />
-    <div class:"flex-column">
+    <div class="flex-column">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class:"flex-row">
-        @Html.Label("Publication Image")
-    <div class="file_upload input" style="">
-        <button type="button">Выбрать</button>
-        <div>Файл не выбран</div>
-        <input type="file" id="imagefile" name="imagefile" />
-    </div>
-    </div>
-        <div class:"flex-row">
-            @Html.LabelFor(m => m.PublicationName)
-
-            @Html.TextBoxFor(m => m.PublicationName)
-            @Html.ValidationMessageFor(m => m.PublicationName)
-        </div>
-        <div class:"flex-row">
-            @Html.LabelFor(m => m.CategoryID)
-            <div>
-                @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories, "-- Select Status --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.CategoryID)
+            <div class="form-group flex-row">
+            @Html.LabelFor(m => m.PublicationName,new { @class = "col-md-2 contol-label" })
+                <div class="col-lg-6 col-md-8">
+                    @Html.TextBoxFor(m => m.PublicationName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PublicationName,"", new { @class = "text-danger" })
+                 </div>
+            </div>
+        <div class="form-group flex-row">
+            @Html.Label("Category", new { @class = "col-md-2 contol-label" })
+            <div class="col-lg-6 col-md-8">
+                @Html.DropDownListFor(m => m.CategoryID, @Model.Categories, "Please, select category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class:"flex-row">
-            @Html.LabelFor(m => m.Text)
-            <div>
-                <textarea class="input" name="Text" rows="10" onfocus="placeholder = '';" onblur="placeholder = 'Your text of publication:';"></textarea>
-            </div>
-            @Html.ValidationMessageFor(m => m.Text)
+        <div class="form-group flex-row">
+            @Html.LabelFor(m => m.Text, new { @class = "col-md-2 contol-label" })
+            <div class="flex-row">
+                    <textarea class="input form-control" name="Text" rows="10"  onfocus="placeholder = '';" onblur="placeholder = 'Your text of publication:';" style="resize:none"></textarea>
+                </div>
+            @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
         </div>
-        <div class:"flex-row">
-            @Html.LabelFor(model => model.DateOfMeeting)
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class='input-group date datetimepicker1'>
+        <div class="flex-row form-group">
+            @Html.LabelFor(model => model.DateOfMeeting, new { @class = "col-md-2 contol-label" })
+                    <div class='input-group date datetimepicker col-lg-6 col-md-8'>
                         <input type='text' id="DateOfMeeting" name="DateOfMeeting" class="form-control" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(model => model.DateOfMeeting, "Incorrect data")
-                </div>
+                    @Html.ValidationMessageFor(model => model.DateOfMeeting, "Incorrect data format", new { @class = "text-danger" })
+ 
+        </div>
+        <div class="flex-row form-group">
+            @Html.Label("Publication Image", new { @class = "col-md-2 contol-label" })
+            <div class="input-group date datetimepicker col-lg-6 col-md-8 file_upload">
+                <button type="button">Chose image</button>
+                <div>Файл не выбран</div>
+                <input type="file" id="imagefile" name="imagefile" />
             </div>
         </div>
-            <div class="form-group">
+            <div class="form-group flex-row">
                 <div>
                     <input type="submit" class="btn btn-default" value="Create" />
                 </div>
@@ -63,17 +60,17 @@
 }
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery-1.12.4.js")
-    @Scripts.Render("~/Scripts/CommonScripts/Publications/DatetimepickerInitializer.js");
+    @Scripts.Render("~/Scripts/CommonScripts/Publications/DatetimepickerInitializer.js")
     @Scripts.Render("~/Scripts/moment.min.js")
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
     @Styles.Render("~/Content/bootstrap-datetimepicker-build.css")
-    @Scripts.Render("~/Scripts/CommonScripts/Publications/FileNameForInputFileWrapper.js");
+    @Scripts.Render("~/Scripts/CommonScripts/Publications/FileNameForInputFileWrapper.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @Styles.Render("~/content/pagestyles/publications-create.css")
     @Styles.Render("~/content/ucss-file-upload.css")
-    @Styles.Render("~/content/datePicker.css");
-    @Styles.Render("~/content/Site.css");
+    @Styles.Render("~/content/datePicker.css")
+    @Styles.Render("~/content/Site.css")
     @Styles.Render("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
     <script>
         $(function () {

@@ -53,7 +53,7 @@ namespace MyMeetings.Models
 
             [Display(Name = "Date of meeting")]
             [DataType(DataType.DateTime)]
-            //[DisplayFormat(DataFormatString = "{0:MM'/'dd'/'yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+            [DisplayFormat(DataFormatString = "{0:MM'/'dd'/'yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
             public DateTime DateOfMeeting { get; set; }
       
             [Display(Name = "Category")]

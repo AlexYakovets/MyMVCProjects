@@ -1,4 +1,4 @@
 ﻿    $(function () {
-        $('.datetimepicker1').datetimepicker({
+        $('.datetimepicker').datetimepicker({
             format: 'DD/MM/YYYY HH:mm'});
     });
