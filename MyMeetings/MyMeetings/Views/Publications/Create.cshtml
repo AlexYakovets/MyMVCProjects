@@ -7,11 +7,12 @@
 <h2>Create new meeting</h2>
 @using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
+    <div class="sidebar">@Html.Action("Sidebar")</div>
     @Html.AntiForgeryToken()
     <hr />
     <div class="flex-column">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group flex-row">
+            <div class="cc form-group flex-row">
             @Html.LabelFor(m => m.PublicationName,new { @class = "col-md-2 contol-label" })
                 <div class="col-lg-6 col-md-8">
                     @Html.TextBoxFor(m => m.PublicationName, new { @class = "form-control" })
@@ -57,6 +58,7 @@
                 </div>
             </div>
         </div>
+
 }
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery-1.12.4.js")

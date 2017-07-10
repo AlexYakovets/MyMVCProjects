@@ -1,4 +1,5 @@
-﻿.file_upload{
+﻿
+.file_upload{
     position: relative;
     overflow: hidden;
     font-size: 1em;        
@@ -15,6 +16,12 @@
     padding-left: 1em    
 }
 @media only screen and ( max-width: 500px ){  /* for mobile devices text is hidden */
+    .flex-column {
+        margin-left: 0px;
+    }
+    .sidebar {
+    display:none;
+    }
     .file_upload > div{
         display: none
     }
@@ -66,11 +73,21 @@
     box-shadow: 0 0 3px rgba(0,0,0,0.3) inset
 }
 .input {
-  border-radius: 4px;
-  box-shadow: 0 0 4px #d2691e;
+     border-radius: 4px;
+     box-shadow: 0 0 4px #d2691e;
 }
 .ui-selectmenu-button {
-     border-radius: 4px;
-  box-shadow: 0 0 4px #d2691e;
+    border-radius: 4px;
+    box-shadow: 0 0 4px #d2691e;
+}
+.sidebar {
+    float: left;
+    position: absolute;
+    width: 300px;
+    margin-bottom: 50px;
+    padding: 40px;
+}
+.flex-column {
+    margin-left: 300px;
 }
 

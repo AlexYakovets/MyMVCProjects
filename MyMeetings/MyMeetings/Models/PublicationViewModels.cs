@@ -32,10 +32,6 @@ namespace MyMeetings.Models
                 {
                     string userId = ClaimsPrincipal.Current.Identity.GetUserId();
                     return Subscribers.Any(user=>user.Id==userId);
-                    //var Subscribings =
-                    //    this.Subscribers.FirstOrDefault(user => user.Id == ClaimsPrincipal.Current.Identity.GetUserId());
-                    //return Subscribings != null;
-
                 }
             }
         }
@@ -60,10 +56,15 @@ namespace MyMeetings.Models
             public string CategoryID { get; set; }
             [NotMapped]
             public SelectList Categories { get; set; }
-
-
-
-
+        }
+        public class ShortPublicationModelView {
+            public string PublicationId;
+            public string ImagePath;
+            public string Creator;
+            public string DateOfPublication;
+            public string PublicationName;
+            public string DateOfMeet;
+            public string Category;
         }
     }
     }
