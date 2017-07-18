@@ -10,10 +10,12 @@ namespace MyMeetings.Models
     public class PublicationChat
     {
         [Key]
-        public string ChatId;
-        public List<ChatUser> Users;
-        public List<ChatMessage> Messages;
-        public Publication Publication;
+        public string ChatId { get; set; }
+        public List<ChatUser> Users { get; set; }
+        public List<ChatMessage> Messages { get; set; }
+        public virtual Publication Publication { get; set; }
+        [InverseProperty("Chat")] 
+        public virtual ICollection<Publication> PublicationEntity { get; set; }
         public PublicationChat()
         {
             ChatId = Guid.NewGuid().ToString();
@@ -24,14 +26,23 @@ namespace MyMeetings.Models
     }
     public class ChatUser
     {
-        public ApplicationUser User;
-        public DateTime LoginTime;
-        public DateTime LastPing;
+        [Key]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+        public DateTime LoginTime { get; set; }
+        public DateTime LastPing { get; set; }
     }
     public class ChatMessage
     {
-        public ChatUser User;
-        public DateTime Date = DateTime.Now;
-        public string Text = "";
+        [Key]
+        public string id { get; set; }
+        public ChatUser User { get; set; }
+        public DateTime Date { get; set; }
+        public string Text { get; set; }
+        public ChatMessage()
+        {
+            id = Guid.NewGuid().ToString();
+            Date = DateTime.Now;
+        }
     }
 }

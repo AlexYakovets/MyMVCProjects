@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201705250835050_publication datemeeting fixed.Designer.cs">
       <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707181711078_added chat.cs" />
+    <Compile Include="Migrations\201707181711078_added chat.Designer.cs">
+      <DependentUpon>201707181711078_added chat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -573,6 +577,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705250835050_publication datemeeting fixed.resx">
       <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707181711078_added chat.resx">
+      <DependentUpon>201707181711078_added chat.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
