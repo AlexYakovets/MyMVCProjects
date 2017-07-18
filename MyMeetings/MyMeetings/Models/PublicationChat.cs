@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +9,7 @@ namespace MyMeetings.Models
 {
     public class PublicationChat
     {
+        [Key]
         public string ChatId;
         public List<ChatUser> Users;
         public List<ChatMessage> Messages;

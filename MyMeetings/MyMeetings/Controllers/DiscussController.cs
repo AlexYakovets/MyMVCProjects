@@ -55,7 +55,7 @@ namespace MyMeetings.Controllers
                         });
                     }
 
-                    return View("ChatRoom", chatModel);
+                    return View("Discuss", chatModel);
                 }
                 else
                 {
