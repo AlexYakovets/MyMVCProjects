@@ -219,6 +219,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\DiscussController.cs" />
     <Compile Include="Controllers\FindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Image.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Models\ApplicationRoleManager.cs" />
     <Compile Include="Models\PublicationCategory.cs" />
     <Compile Include="Models\CategoriesViewModels.cs" />
+    <Compile Include="Models\PublicationChat.cs" />
     <Compile Include="Models\PublicationModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -552,10 +554,12 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Publications\Sidebar.cshtml" />
+    <Content Include="Views\Publications\Discuss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\CategoriesViewModels\" />
+    <Folder Include="Views\Discuss\" />
     <Folder Include="Views\ModerationViewModels\" />
     <Folder Include="Views\PublicationCategories\" />
   </ItemGroup>

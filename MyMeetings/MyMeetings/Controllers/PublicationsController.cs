@@ -152,12 +152,13 @@ namespace MyMeetings.Controllers
         {
             return true;
         }
-        [ChildActionOnly]
+        //[ChildActionOnly]
         public ActionResult Sidebar()
         {
             List<MyMeetings.Models.PublicationViewModels.ShortPublicationModelView> result = new List<PublicationViewModels.ShortPublicationModelView>();
             var news = DB.Publications.OrderByDescending(m => m.DateTimeOfPublication).Take(3);
             foreach (var a in news)
+
                 result.Add(new PublicationViewModels.ShortPublicationModelView
                 {
                     Creator = a.Author.FirstName +" "+ a.Author.SurName,

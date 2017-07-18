@@ -41,7 +41,8 @@ namespace MyMeetings.Models
     {
         public DbSet<PublicationCategory> PublicationCategories { get; set; }
         public DbSet<Publication> Publications { get; set; }
-        public ApplicationDbContext()
+        public DbSet<PublicationChat> Chats { get; set; }
+    public ApplicationDbContext()
             : base("MyMeetings", throwIfV1Schema: false)
         {
     }

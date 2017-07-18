@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
+
 namespace MyMeetings.Models
 {
     public class Publication
@@ -18,7 +19,7 @@ namespace MyMeetings.Models
         public DateTime DateTimeOfPublication { get; set; }
         public DateTime DateOfMeeting { get; set; }
         public string AuthorId { get; set; }
-
+        public virtual PublicationChat Chat { get; set; }
         public virtual PublicationCategory Category { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
@@ -30,6 +31,7 @@ namespace MyMeetings.Models
             Subscriptions = new List<ApplicationUser>();
             DateTimeOfPublication = DateTime.Now;
             Id = Guid.NewGuid().ToString();
+            Chat = new PublicationChat { ChatId = Id, Users = new List<ChatUser>(), Messages = new List<ChatMessage>() };
         }
     }
 

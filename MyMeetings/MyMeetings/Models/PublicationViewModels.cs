@@ -46,12 +46,12 @@ namespace MyMeetings.Models
             [StringLength(500, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
             [Display(Name = "Description of publication")]
             public string Text { get; set; }
-
+            [Required]
             [Display(Name = "Date of meeting")]
             [DataType(DataType.DateTime)]
             [DisplayFormat(DataFormatString = "{0:MM'/'dd'/'yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
             public DateTime DateOfMeeting { get; set; }
-      
+            [Required]
             [Display(Name = "Category")]
             public string CategoryID { get; set; }
             [NotMapped]

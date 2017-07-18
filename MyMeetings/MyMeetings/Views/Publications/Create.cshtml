@@ -7,7 +7,7 @@
 <h2>Create new meeting</h2>
 @using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
-    <div class="sidebar">@Html.Action("Sidebar")</div>
+    <div  class="sidebar">@*@Html.Action("Sidebar")*@</div>
     @Html.AntiForgeryToken()
     <hr />
     <div class="flex-column">
@@ -16,7 +16,7 @@
             @Html.LabelFor(m => m.PublicationName,new { @class = "col-md-2 contol-label" })
                 <div class="col-lg-6 col-md-8">
                     @Html.TextBoxFor(m => m.PublicationName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.PublicationName,"", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.PublicationName, "", new { @class = "text-danger" })
                  </div>
             </div>
         <div class="form-group flex-row">
@@ -29,7 +29,7 @@
         <div class="form-group flex-row">
             @Html.LabelFor(m => m.Text, new { @class = "col-md-2 contol-label" })
             <div class="flex-row">
-                    <textarea class="input form-control" name="Text" rows="10"  onfocus="placeholder = '';" onblur="placeholder = 'Your text of publication:';" style="resize:none"></textarea>
+                    <textarea class="input form-control" name="Text" rows="10"  onfocus="placeholder = ''" onblur="placeholder = 'Your text of publication:';" style="resize:none"></textarea>
                 </div>
             @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
         </div>
@@ -55,10 +55,10 @@
             <div class="form-group flex-row">
                 <div>
                     <input type="submit" class="btn btn-default" value="Create" />
+                    <input type="submit" class="btn update" value="Update" />
                 </div>
             </div>
         </div>
-
 }
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery-1.12.4.js")
@@ -66,18 +66,17 @@
     @Scripts.Render("~/Scripts/moment.min.js")
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
-    @Styles.Render("~/Content/bootstrap-datetimepicker-build.css")
     @Scripts.Render("~/Scripts/CommonScripts/Publications/FileNameForInputFileWrapper.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Styles.Render("~/Content/bootstrap-datetimepicker-build.css")
     @Styles.Render("~/content/pagestyles/publications-create.css")
     @Styles.Render("~/content/ucss-file-upload.css")
     @Styles.Render("~/content/datePicker.css")
     @Styles.Render("~/content/Site.css")
-    @Styles.Render("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
-    <script>
-        $(function () {
-            $("#category").selectmenu();
+    @Styles.Render("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setInterval(function () { $('.sidebar').load('@Url.Action("Sidebar")') }, 30000);
         });
-    </script>
+   </script>
 }
-
