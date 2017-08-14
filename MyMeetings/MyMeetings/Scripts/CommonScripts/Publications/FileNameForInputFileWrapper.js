@@ -1,4 +1,4 @@
-﻿;{
+﻿{
     var wrapper = $(".file_upload"),
         inp = wrapper.find("input"),
         btn = wrapper.find("button"),
@@ -6,19 +6,24 @@
     btn.focus(function() {
         inp.focus()
     });
-// Crutches for the :focus style:
-    inp.focus(function() {
+
+    inp.focus(function () {
         wrapper.addClass("focus");
-    }).blur(function() {
+    }).blur(function () {
         wrapper.removeClass("focus");
-    });
-    btn.add(lbl).click(function() {
+        });
+    btn.add(lbl).click(function () {
         inp.click();
     });
-    btn.focus(function() {
+    // Crutches for the :focus style:
+    btn.focus(function () {
         wrapper.addClass("focus");
-    }).blur(function() {
+    }).blur(function () {
         wrapper.removeClass("focus");
+        });
+
+    $(window).resize(function () {
+        $(".file_upload input").triggerHandler("change");
     });
 
     var file_api = (window.File && window.FileReader && window.FileList && window.Blob) ? true : false;
@@ -35,7 +40,7 @@
 
         if (lbl.is(":visible")) {
             lbl.text(file_name);
-            btn.text("Выбрать");
+            btn.text("Chose");
         } else
             btn.text(file_name);
     }).change();

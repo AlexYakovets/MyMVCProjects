@@ -11,7 +11,7 @@ using MyMeetings.Models;
 
 namespace MyMeetings.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private ApplicationRoleManager RoleManager

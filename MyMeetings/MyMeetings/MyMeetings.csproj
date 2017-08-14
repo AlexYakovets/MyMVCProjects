@@ -231,22 +231,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705241652565_InitialCreate.cs" />
-    <Compile Include="Migrations\201705241652565_InitialCreate.Designer.cs">
-      <DependentUpon>201705241652565_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201708101218429_InitialCreate.cs" />
+    <Compile Include="Migrations\201708101218429_InitialCreate.Designer.cs">
+      <DependentUpon>201708101218429_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705250835050_publication datemeeting fixed.cs" />
-    <Compile Include="Migrations\201705250835050_publication datemeeting fixed.Designer.cs">
-      <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707181711078_added chat.cs" />
-    <Compile Include="Migrations\201707181711078_added chat.Designer.cs">
-      <DependentUpon>201707181711078_added chat.cs</DependentUpon>
+    <Compile Include="Migrations\201708101224466_Edit in ApplicationUser.cs" />
+    <Compile Include="Migrations\201708101224466_Edit in ApplicationUser.Designer.cs">
+      <DependentUpon>201708101224466_Edit in ApplicationUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\ChatViewModels.cs" />
     <Compile Include="Models\PublicationCategory.cs" />
     <Compile Include="Models\CategoriesViewModels.cs" />
     <Compile Include="Models\PublicationChat.cs" />
@@ -357,6 +354,7 @@
     <Content Include="Scripts\CommonScripts\datetimepicker-master\screen\6.png" />
     <Content Include="Scripts\CommonScripts\datetimepicker-master\tests\input_in_container_fixed_to_bottom_of_viewport.html" />
     <Content Include="Scripts\CommonScripts\datetimepicker-master\tests\input_in_container_fixed_to_top_of_viewport.html" />
+    <Content Include="Scripts\CommonScripts\Discuss\AddMessage.js" />
     <Content Include="Scripts\CommonScripts\jquery-ui-1.12.1.custom\package.json" />
     <Content Include="Scripts\CommonScripts\Publications\DatetimepickerInitializer.js" />
     <Content Include="Scripts\CommonScripts\Publications\FlipCountDownInitializer.js" />
@@ -558,28 +556,25 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Publications\Sidebar.cshtml" />
-    <Content Include="Views\Publications\Discuss.cshtml" />
+    <Content Include="Views\Discuss\Index.cshtml" />
+    <Content Include="Views\Discuss\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\CategoriesViewModels\" />
-    <Folder Include="Views\Discuss\" />
-    <Folder Include="Views\ModerationViewModels\" />
     <Folder Include="Views\PublicationCategories\" />
+    <Folder Include="Views\Publications\ModerationViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705241652565_InitialCreate.resx">
-      <DependentUpon>201705241652565_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708101218429_InitialCreate.resx">
+      <DependentUpon>201708101218429_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250835050_publication datemeeting fixed.resx">
-      <DependentUpon>201705250835050_publication datemeeting fixed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707181711078_added chat.resx">
-      <DependentUpon>201707181711078_added chat.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708101224466_Edit in ApplicationUser.resx">
+      <DependentUpon>201708101224466_Edit in ApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

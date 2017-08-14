@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
+<div id="messages">
+        @foreach (var item in Model)
+        {
+            <div>@item.Text</div>
+            <div>@item.Author</div>
+            <div>@item.DateOfCreate</div>
+        }
+</div>

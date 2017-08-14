@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MyMeetings.Models;
@@ -8,102 +9,74 @@ namespace MyMeetings.Controllers
 {
     public class DiscussController : Controller
     {
-        static ApplicationDbContext DB = new ApplicationDbContext();
-         PublicationChat chatModel;
+
+        PublicationChat chatModel;
         // GET: Discuss
-        public ActionResult Index(string ChatId,string UserId)
+        public ActionResult Index(string ChatId, int? page)
         {
-            chatModel = DB.Chats.FirstOrDefault(c => c.ChatId == ChatId);
-            var currentUser = DB.Users.FirstOrDefault(u => u.Id == UserId);
-            try
+            using (ApplicationDbContext DB = new ApplicationDbContext())
             {
-                if (chatModel == null) chatModel = new PublicationChat();
-
-                //оставляем только последние 10 сообщений
-                if (chatModel.Messages.Count > 100)
-                    chatModel.Messages.RemoveRange(0, 90);
-
-                // если обычный запрос, просто возвращаем представление
-                if (!Request.IsAjaxRequest())
+                var currentUser = DB.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                chatModel = DB.Chats.Include(p => p.Publication).FirstOrDefault(c => c.Id == ChatId);
+                ChatViewModels.ChatViewModel model = new ChatViewModels.ChatViewModel()
                 {
-                    return View(chatModel);
-                }
-                // если передан параметр logOn
-                else if (UserId != null && UserId!="")
-                {
-                    //проверяем, существует ли уже такой пользователь
-                    if (chatModel.Users.FirstOrDefault(u => u.User.Id == UserId) != null)
-                    {
-                        throw new Exception("Пользователь с таким ником уже существует");
-                    }
-                    else
-                    {
-                        // добавляем в список нового пользователя
-                        chatModel.Users.Add(new ChatUser()
-                        {
-                           
-                            User = currentUser,
-                            LoginTime = DateTime.Now,
-                            LastPing = DateTime.Now
-                        });
-
-                        // добавляем в список сообщений сообщение о новом пользователе
-                        chatModel.Messages.Add(new ChatMessage()
-                        {
-                            Text = currentUser.FirstName+currentUser.SurName + " вошел в чат",
-                            Date = DateTime.Now
-                        });
-                    }
-
-                    return View("Discuss", chatModel);
-                }
-                else
-                {
-                    ChatUser currentChatUser = chatModel.Users.FirstOrDefault(u => u.User == currentUser);
-
-                    currentChatUser.LastPing = DateTime.Now;
-
-                    List<ChatUser> toRemove = new List<ChatUser>();
-                    foreach (Models.ChatUser usr in chatModel.Users)
-                    {
-                        TimeSpan span = DateTime.Now - usr.LastPing;
-                        if (span.TotalSeconds > 120)
-                            toRemove.Add(usr);
-                    }
-                    foreach (ChatUser u in toRemove)
-                    {
-                        LogOff(u);
-                    }
-
-                    // добавляем в список сообщений новое сообщение
-                    //if (!string.IsNullOrEmpty(chatMessage))
-                    //{
-                    //    chatModel.Messages.Add(new ChatMessage()
-                    //    {
-                    //        User = currentChatUser,
-                    //        Text = chatMessage,
-                    //        Date = DateTime.Now
-                    //    });
-                    //}
-
-                   return PartialView("History", chatModel);
-                }
-            }
-            catch (Exception ex)
-            {
-                //в случае ошибки посылаем статусный код 500
-                Response.StatusCode = 500;
-                return Content(ex.Message);
+                    DateOfCreate = chatModel.DateofCreate.ToString(),
+                    Id = chatModel.Id,
+                    Author = currentUser.FirstName + currentUser.SurName
+                };
+                return View(model);
             }
         }
-        public void LogOff(ChatUser user)
+        public ActionResult Messages(string chatId)
         {
-            chatModel.Users.Remove(user);
-            chatModel.Messages.Add(new ChatMessage()
+            using (ApplicationDbContext DB = new ApplicationDbContext())
             {
-                Text = user.User.FirstName+" "+user.User.SurName + " покинул чат.",
-                Date = DateTime.Now
-            });
+                PublicationChat currentchat = DB.Chats.Include(m=>m.Messages).Include(u=>u.Users).FirstOrDefault(c=>c.Id==chatId);
+                var allMessages = currentchat.Messages;
+                List<ChatViewModels.ChatMessageModelView> chatMessages = new List<ChatViewModels.ChatMessageModelView>();
+                foreach (var m in allMessages)
+                {
+                    ChatViewModels.ChatMessageModelView message = new ChatViewModels.ChatMessageModelView()
+                    {
+                        Author = m.User.FirstName + m.User.SurName,
+                        Text = m.Text,
+                        DateOfCreate = m.Date.ToString()
+                    };
+                    chatMessages.Add(message);
+                }
+                chatMessages.OrderBy(c => c.DateOfCreate);
+                if (chatMessages.Count <= 0)
+                {
+                    return HttpNotFound();
+                }
+                else return PartialView("Messages", chatMessages);
+            }
+        }
+        [HttpPost]
+        public ActionResult AddMessage(string message, string chatId)
+        {
+            if (message != null && chatId != null)
+            {
+                using (ApplicationDbContext DB = new ApplicationDbContext())
+                {
+                    PublicationChat currentchat = DB.Chats.FirstOrDefault(c => c.Id == chatId);
+                    ApplicationUser currentAppUser = DB.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                    currentAppUser.LastActivity = DateTime.Now;
+                    DB.SaveChanges();
+                    currentchat.Users.Add(currentAppUser);
+                    ChatMessage newMesage = new ChatMessage() { User = currentAppUser, Text = message };
+
+                    currentchat.Messages.Add(newMesage);
+                    DB.SaveChanges();
+                }
+            }
+            //var chatMessages=Messages(chatId);
+            //if (chatMessages.Count <= 0)
+            //{
+            //    return HttpNotFound();
+            //}
+            //else return PartialView("Messages",chatMessages);
+            return RedirectToAction("Messages", new { chatid = chatId });
         }
     }
-    }
+}

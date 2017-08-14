@@ -52,6 +52,7 @@ namespace MyMeetings.Controllers
                     Category = DB.PublicationCategories.FirstOrDefault(p => p.Id == model.CategoryID.ToString()),
                     Subscriptions = new List<ApplicationUser>() { currentAuthor }
                 };
+               
                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                 string filePath =
                     System.Web.HttpContext.Current.Server.MapPath(
@@ -59,10 +60,15 @@ namespace MyMeetings.Controllers
                         publication.Id + ".png");
                 Image.SaveImage(hpf, filePath, 100, 100);
                 publication.ImagePath = filePath;
-
                 DB.Publications.Add(publication);
                 DB.SaveChanges();
+                PublicationChat chat = new PublicationChat();
+                chat.Id = publication.Id;
+                DB.Chats.Add(chat);
+                DB.SaveChanges();
                 return RedirectToAction("Index", "Home");
+                //DB.Chats.Add(chat);
+
             }
             else
             {
@@ -82,7 +88,7 @@ namespace MyMeetings.Controllers
                 string ImagePath;
                 if (System.IO.File.Exists(publ.ImagePath))
                 {
-                    ImagePath = ConfigurationManager.AppSettings["PublicationAvatarsPath"] +
+                    ImagePath = ConfigurationManager.AppSettings["PublicationAvatarsPath"] + "\\" +
                                 publ.Id + ".png";
                 }
                 else

@@ -17,6 +17,8 @@ namespace MyMeetings.Models
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime DateOfRegistration { get; set; }
+        public DateTime? LastActivity { get; set; }
+        public DateTime? Lastlogin { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
         public virtual ICollection<Publication> Subscriptions { get; set; }
 
@@ -42,7 +44,9 @@ namespace MyMeetings.Models
         public DbSet<PublicationCategory> PublicationCategories { get; set; }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<PublicationChat> Chats { get; set; }
-    public ApplicationDbContext()
+
+
+        public ApplicationDbContext()
             : base("MyMeetings", throwIfV1Schema: false)
         {
     }

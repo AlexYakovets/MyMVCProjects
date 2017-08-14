@@ -8,33 +8,31 @@ namespace MyMeetings.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.PublicationCategories",
+                "dbo.PublicationChats",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Publications",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                        ImagePath = c.String(),
-                        Text = c.String(),
-                        DateTimeOfPublication = c.DateTime(nullable: false),
-                        DateOfMeeting = c.DateTime(nullable: false),
-                        AuthorId = c.String(maxLength: 128),
-                        Category_Id = c.String(maxLength: 128),
+                        DateofCreate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.AuthorId)
-                .ForeignKey("dbo.PublicationCategories", t => t.Category_Id)
-                .Index(t => t.AuthorId)
-                .Index(t => t.Category_Id);
+                .ForeignKey("dbo.Publications", t => t.Id)
+                .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.ChatMessages",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Date = c.DateTime(nullable: false),
+                        Text = c.String(),
+                        User_Id = c.String(maxLength: 128),
+                        PublicationChat_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .ForeignKey("dbo.PublicationChats", t => t.PublicationChat_Id)
+                .Index(t => t.User_Id)
+                .Index(t => t.PublicationChat_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -46,6 +44,8 @@ namespace MyMeetings.Migrations
                         Gender = c.String(),
                         DateOfBirth = c.DateTime(nullable: false),
                         DateOfRegistration = c.DateTime(nullable: false),
+                        LastActivity = c.DateTime(nullable: false),
+                        Lastlogin = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -57,9 +57,12 @@ namespace MyMeetings.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        PublicationChat_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .ForeignKey("dbo.PublicationChats", t => t.PublicationChat_Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
+                .Index(t => t.PublicationChat_Id);
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -85,6 +88,35 @@ namespace MyMeetings.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Publications",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                        ImagePath = c.String(),
+                        Text = c.String(),
+                        DateTimeOfPublication = c.DateTime(nullable: false),
+                        DateOfMeeting = c.DateTime(nullable: false),
+                        AuthorId = c.String(maxLength: 128),
+                        Category_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.AuthorId)
+                .ForeignKey("dbo.PublicationCategories", t => t.Category_Id)
+                .Index(t => t.AuthorId)
+                .Index(t => t.Category_Id);
+            
+            CreateTable(
+                "dbo.PublicationCategories",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -129,10 +161,14 @@ namespace MyMeetings.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.AspNetUsers", "PublicationChat_Id", "dbo.PublicationChats");
+            DropForeignKey("dbo.PublicationChats", "Id", "dbo.Publications");
+            DropForeignKey("dbo.ChatMessages", "PublicationChat_Id", "dbo.PublicationChats");
+            DropForeignKey("dbo.ChatMessages", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.PublicationApplicationUsers", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.PublicationApplicationUsers", "Publication_Id", "dbo.Publications");
             DropForeignKey("dbo.Publications", "Category_Id", "dbo.PublicationCategories");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Publications", "AuthorId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -141,19 +177,25 @@ namespace MyMeetings.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Publications", new[] { "Category_Id" });
             DropIndex("dbo.Publications", new[] { "AuthorId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", new[] { "PublicationChat_Id" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.ChatMessages", new[] { "PublicationChat_Id" });
+            DropIndex("dbo.ChatMessages", new[] { "User_Id" });
+            DropIndex("dbo.PublicationChats", new[] { "Id" });
             DropTable("dbo.PublicationApplicationUsers");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.PublicationCategories");
+            DropTable("dbo.Publications");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Publications");
-            DropTable("dbo.PublicationCategories");
+            DropTable("dbo.ChatMessages");
+            DropTable("dbo.PublicationChats");
         }
     }
 }

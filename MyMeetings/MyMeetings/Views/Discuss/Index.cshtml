@@ -1,0 +1,33 @@
+﻿@model MyMeetings.Models.ChatViewModels.ChatViewModel
+
+@{
+    ViewBag.Title = "Publication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script type="text/jscript">
+    function AddMessage() {
+        var data = { chatId: $("#chat-id").val(), message: $("#message").val() };
+        $.post("Discuss/Addmessage", data)
+    };
+</script>*@
+
+<h2>@Model.Name</h2>
+
+<div>@Model.Author</div>
+<div>@Model.DateOfCreate</div>
+<hr>
+<div id="messages"></div>
+
+    @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
+    {
+        <input type="hidden" id="chat-id" name="chatId" value=@Model.Id>
+        <input type="text" id="message" name="message" />
+        @*<input type="submit" id="add-message" onclick=AddMessage() value="Add message" />*@
+        <input type="submit" id="add-message"  value="Add message" />
+    }
+
+@section Scripts {
+   @* @Scripts.Render("~/Scripts/CommonScripts/Discuss/AddMessage.js");*@
+    @Scripts.Render("~/scripts/jquery-1.7.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+}
