@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace MyMeetings.Controllers
-{
+{   
     public class Image
     {
         public static void SaveImage(HttpPostedFileBase hpf, string filePath, int maxWidth,int maxHeight)

@@ -58,7 +58,7 @@ namespace MyMeetings.Controllers
                     System.Web.HttpContext.Current.Server.MapPath(
                         ConfigurationManager.AppSettings["PublicationAvatarsPath"] + "\\" +
                         publication.Id + ".png");
-                Image.SaveImage(hpf, filePath, 100, 100);
+                Image.SaveImage(hpf, filePath, 500, 500);
                 publication.ImagePath = filePath;
                 DB.Publications.Add(publication);
                 DB.SaveChanges();
