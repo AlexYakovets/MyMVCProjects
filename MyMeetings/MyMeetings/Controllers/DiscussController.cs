@@ -32,7 +32,7 @@ namespace MyMeetings.Controllers
             using (ApplicationDbContext DB = new ApplicationDbContext())
             {
                 PublicationChat currentchat = DB.Chats.Include(m=>m.Messages).Include(u=>u.Users).FirstOrDefault(c=>c.Id==chatId);
-                var allMessages = currentchat.Messages;
+                var allMessages = currentchat.Messages.OrderBy(c=>c.Date);
                 List<ChatViewModels.ChatMessageModelView> chatMessages = new List<ChatViewModels.ChatMessageModelView>();
                 foreach (var m in allMessages)
                 {
@@ -44,7 +44,6 @@ namespace MyMeetings.Controllers
                     };
                     chatMessages.Add(message);
                 }
-                chatMessages.OrderBy(c => c.DateOfCreate);
                 if (chatMessages.Count <= 0)
                 {
                     return HttpNotFound();

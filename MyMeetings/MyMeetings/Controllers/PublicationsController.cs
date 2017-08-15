@@ -25,9 +25,6 @@ namespace MyMeetings.Controllers
         public ActionResult Create()
         {
             PublicationViewModels.CreatePublicationModelView model = new PublicationViewModels.CreatePublicationModelView();
-            //model.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
-
-            //ViewBag.Categories = new SelectList(_DB.PublicationCategories, "Id", "Name");
             model.Categories = new SelectList(DB.PublicationCategories, "Id", "Name");
             return View(model);
         }
@@ -58,7 +55,7 @@ namespace MyMeetings.Controllers
                     System.Web.HttpContext.Current.Server.MapPath(
                         ConfigurationManager.AppSettings["PublicationAvatarsPath"] + "\\" +
                         publication.Id + ".png");
-                Image.SaveImage(hpf, filePath, 500, 500);
+                Image.SaveImage(hpf, filePath, 1000, 1000);
                 publication.ImagePath = filePath;
                 DB.Publications.Add(publication);
                 DB.SaveChanges();
@@ -67,8 +64,6 @@ namespace MyMeetings.Controllers
                 DB.Chats.Add(chat);
                 DB.SaveChanges();
                 return RedirectToAction("Index", "Home");
-                //DB.Chats.Add(chat);
-
             }
             else
             {

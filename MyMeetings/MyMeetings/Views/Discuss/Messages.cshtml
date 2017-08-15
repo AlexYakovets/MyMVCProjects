@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
-<div id="messages">
+<link href="~/Content/PageStyles/discuss-messages.css" type="text/css" rel="stylesheet" />
         @foreach (var item in Model)
         {
+            <div class="message-block">
             <div>@item.Text</div>
             <div>@item.Author</div>
             <div>@item.DateOfCreate</div>
+         </div>
         }
-</div>
+<style type="text/css">
+
+</style>

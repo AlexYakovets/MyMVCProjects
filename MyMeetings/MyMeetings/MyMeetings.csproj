@@ -270,6 +270,7 @@
     <Content Include="Content\datePicker.css" />
     <Content Include="Content\images\UserInfo.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\PageStyles\discuss-messages.css" />
     <Content Include="Content\PageStyles\manage-index-style.css" />
     <Content Include="Content\PageStyles\publications-create.css" />
     <Content Include="Content\PageStyles\publications-show.css" />
