@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MyMeetings.Models;
+using PagedList;
 namespace MyMeetings.Controllers
 {
     public class DiscussController : Controller
@@ -12,7 +13,7 @@ namespace MyMeetings.Controllers
 
         PublicationChat chatModel;
         // GET: Discuss
-        public ActionResult Index(string ChatId, int? page)
+        public ActionResult Index(string ChatId)
         {
             using (ApplicationDbContext DB = new ApplicationDbContext())
             {
@@ -27,12 +28,15 @@ namespace MyMeetings.Controllers
                 return View(model);
             }
         }
-        public ActionResult Messages(string chatId)
+        public ActionResult Messages(string chatId, int? page)
         {
+            bool flag;
+            if (Request.IsAjaxRequest()) flag=true; else flag=false;
+            
             using (ApplicationDbContext DB = new ApplicationDbContext())
             {
-                PublicationChat currentchat = DB.Chats.Include(m=>m.Messages).Include(u=>u.Users).FirstOrDefault(c=>c.Id==chatId);
-                var allMessages = currentchat.Messages.OrderBy(c=>c.Date);
+                PublicationChat currentchat = DB.Chats.Include(m => m.Messages).Include(u => u.Users).FirstOrDefault(c => c.Id == chatId);
+                var allMessages = currentchat.Messages.OrderBy(c => c.Date);
                 List<ChatViewModels.ChatMessageModelView> chatMessages = new List<ChatViewModels.ChatMessageModelView>();
                 foreach (var m in allMessages)
                 {
@@ -48,8 +52,12 @@ namespace MyMeetings.Controllers
                 {
                     return HttpNotFound();
                 }
-                else return PartialView("Messages", chatMessages);
+                int pagesize = 3;
+                int pagenumber = (page ?? 1);
+                ViewBag.ChatId = chatId;
+                return PartialView("Messages", chatMessages.ToPagedList(pagenumber, pagesize));
             }
+
         }
         [HttpPost]
         public ActionResult AddMessage(string message, string chatId)

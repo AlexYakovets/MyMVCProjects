@@ -1,5 +1,7 @@
 ﻿@model MyMeetings.Models.ChatViewModels.ChatViewModel
-
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/PageStyles/discuss-messages.css" type="text/css" rel="stylesheet" />
 @{
     ViewBag.Title = "Publication";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +12,7 @@
 <div>@Model.DateOfCreate</div>
 <hr>
 <div id="messages"></div>
-    @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
+   @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
     {
         <input type="hidden" id="chat-id" name="chatId" value=@Model.Id>
         <input type="text" id="message" name="message" />

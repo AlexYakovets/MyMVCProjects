@@ -1,13 +1,16 @@
-﻿@model IEnumerable<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
-<link href="~/Content/PageStyles/discuss-messages.css" type="text/css" rel="stylesheet" />
-        @foreach (var item in Model)
-        {
-            <div class="message-block">
-            <div>@item.Text</div>
-            <div>@item.Author</div>
-            <div>@item.DateOfCreate</div>
-         </div>
-        }
-<style type="text/css">
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
 
-</style>
+
+@foreach (var item in Model)
+{
+    <div class="message-block">
+        <div>@item.Text</div>
+        <div>@item.Author</div>
+        <div>@item.DateOfCreate</div>
+    </div>
+}
+<br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Messages",new {chatId=ViewBag.ChatId,page=page }))
+@*@Html.PagedListPager(Model, page => Url.Action("Messages",new {chatId=ViewBag.ChatId,page=page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "messages" })))*@
