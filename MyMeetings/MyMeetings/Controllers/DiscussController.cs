@@ -13,25 +13,8 @@ namespace MyMeetings.Controllers
 
         PublicationChat chatModel;
         // GET: Discuss
-        public ActionResult Index(string ChatId)
+        public ActionResult Index(string chatId, int? page)
         {
-            using (ApplicationDbContext DB = new ApplicationDbContext())
-            {
-                var currentUser = DB.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-                chatModel = DB.Chats.Include(p => p.Publication).FirstOrDefault(c => c.Id == ChatId);
-                ChatViewModels.ChatViewModel model = new ChatViewModels.ChatViewModel()
-                {
-                    DateOfCreate = chatModel.DateofCreate.ToString(),
-                    Id = chatModel.Id,
-                    Author = currentUser.FirstName + currentUser.SurName
-                };
-                return View(model);
-            }
-        }
-        public ActionResult Messages(string chatId, int? page)
-        {
-            bool flag;
-            if (Request.IsAjaxRequest()) flag=true; else flag=false;
             
             using (ApplicationDbContext DB = new ApplicationDbContext())
             {
@@ -55,10 +38,65 @@ namespace MyMeetings.Controllers
                 int pagesize = 3;
                 int pagenumber = (page ?? 1);
                 ViewBag.ChatId = chatId;
-                return PartialView("Messages", chatMessages.ToPagedList(pagenumber, pagesize));
-            }
+                return PartialView("Index", chatMessages.ToPagedList(chatMessages.Count / pagesize, pagesize));
 
-        }
+            }
+                //using (ApplicationDbContext DB = new ApplicationDbContext())
+                //{
+                //    var currentUser = DB.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                //    chatModel = DB.Chats.Include(p => p.Publication).Include(m => m.Messages).FirstOrDefault(c => c.Id == ChatId);
+                //    var allMessages = chatModel.Messages.OrderBy(c => c.Date);
+                //    List<ChatViewModels.ChatMessageModelView> chatMessages = new List<ChatViewModels.ChatMessageModelView>();
+                //    foreach (var m in allMessages)
+                //    {
+                //        ChatViewModels.ChatMessageModelView message = new ChatViewModels.ChatMessageModelView()
+                //        {
+                //            Author = m.User.FirstName + m.User.SurName,
+                //            Text = m.Text,
+                //            DateOfCreate = m.Date.ToString()
+                //        };
+                //        chatMessages.Add(message);
+                //    }
+                //    ChatViewModels.ChatViewModel model = new ChatViewModels.ChatViewModel()
+                //    {
+                //        Messages=chatMessages,
+                //        DateOfCreate = chatModel.DateofCreate.ToString(),
+                //        Id = chatModel.Id,
+                //        Author = currentUser.FirstName + currentUser.SurName
+                //    };
+                //    return View(model);
+                //}
+            }
+        //public ActionResult Messages(string chatId, int? page)
+        //{
+        //    bool flag;
+            
+        //    using (ApplicationDbContext DB = new ApplicationDbContext())
+        //    {
+        //        PublicationChat currentchat = DB.Chats.Include(m => m.Messages).Include(u => u.Users).FirstOrDefault(c => c.Id == chatId);
+        //        var allMessages = currentchat.Messages.OrderBy(c => c.Date);
+        //        List<ChatViewModels.ChatMessageModelView> chatMessages = new List<ChatViewModels.ChatMessageModelView>();
+        //        foreach (var m in allMessages)
+        //        {
+        //            ChatViewModels.ChatMessageModelView message = new ChatViewModels.ChatMessageModelView()
+        //            {
+        //                Author = m.User.FirstName + m.User.SurName,
+        //                Text = m.Text,
+        //                DateOfCreate = m.Date.ToString()
+        //            };
+        //            chatMessages.Add(message);
+        //        }
+        //        if (chatMessages.Count <= 0)
+        //        {
+        //            return HttpNotFound();
+        //        }
+        //        int pagesize = 3;
+        //        int pagenumber = (page ?? 1);
+        //        ViewBag.ChatId = chatId;
+        //        return PartialView("Messages", chatMessages.ToPagedList(pagenumber, pagesize));
+        //    }
+
+        //}
         [HttpPost]
         public ActionResult AddMessage(string message, string chatId)
         {
@@ -83,7 +121,7 @@ namespace MyMeetings.Controllers
             //    return HttpNotFound();
             //}
             //else return PartialView("Messages",chatMessages);
-            return RedirectToAction("Messages", new { chatid = chatId });
+            return RedirectToAction("Index", new { chatid = chatId });
         }
     }
 }

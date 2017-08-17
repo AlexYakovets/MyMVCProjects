@@ -1,28 +1,40 @@
-﻿@model MyMeetings.Models.ChatViewModels.ChatViewModel
-@using PagedList;
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<link href="~/Content/PageStyles/discuss-messages.css" type="text/css" rel="stylesheet" />
 @{
     ViewBag.Title = "Publication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@Model.Name</h2>
+@*<h2>@Model.Name</h2>
 
 <div>@Model.Author</div>
-<div>@Model.DateOfCreate</div>
-<hr>
-<div id="messages"></div>
-   @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
+<div>@Model.DateOfCreate</div>*@
+@*<hr>
+<div id="messages"></div>*@
+<div id="chat-block">
+<div class="messages">
+    @foreach (var item in Model)
     {
-        <input type="hidden" id="chat-id" name="chatId" value=@Model.Id>
-        <input type="text" id="message" name="message" />
-        <input type="submit" id="add-message"  value="Add message" />
+        <div class="message-block">
+            <div>@item.Text</div>
+            <div>@item.Author</div>
+            <div>@item.DateOfCreate</div>
+        </div> 
     }
-
+    </div>
+    @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
+    {
+        <input type="hidden" id="chat-id" name="chatId" value=@ViewBag.ChatID>
+        <input type="text" id="message" name="message" />
+        <input type="submit" id="add-message" value="Add message" />    }
+    <br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { chatId = ViewBag.ChatId, page = page })) 
+</div>
 @section Scripts {
+
     @Scripts.Render("~/scripts/jquery-1.7.1.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Styles.Render("~/Content/PageStyles/discuss-messages.css")
+    @Styles.Render("~/Content/Pagestyles/discuss-messages.css")
 }
 
 
