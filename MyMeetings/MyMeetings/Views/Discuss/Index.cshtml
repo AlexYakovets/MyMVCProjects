@@ -24,10 +24,11 @@
     }
 </script>
 <script type="text/javascript">{
-      $(document).ready(function ()
-      url="Discuss/First?"+data.@Model.Id;
-      $('#results').load(url);
-      });
+        $(document).ready(function ( {
+            url = "Discuss/First?ChatID="
+            $('#results').load(url+@Model.Id);
+            });
+      };
 </script>
 
 
