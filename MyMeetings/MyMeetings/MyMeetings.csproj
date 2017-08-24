@@ -558,6 +558,7 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Publications\Sidebar.cshtml" />
     <Content Include="Views\Discuss\Index.cshtml" />
+    <Content Include="Views\Discuss\Messages_old.cshtml" />
     <Content Include="Views\Discuss\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>

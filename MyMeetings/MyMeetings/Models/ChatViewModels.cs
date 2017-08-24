@@ -13,7 +13,10 @@ namespace MyMeetings.Models
             public string Name { get; set; }
             public string Author{ get; set; }
             public string DateOfCreate { get; set; }
-            public IEnumerable<ChatMessageModelView> Messages { get; set; }
+            public List<ChatMessageModelView> Messages { get; set; }
+            public ChatViewModel() {
+                Messages = new List<ChatMessageModelView>();
+            }
         }
         public class ChatMessageModelView
         {

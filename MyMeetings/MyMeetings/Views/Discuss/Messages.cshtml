@@ -1,17 +1,46 @@
 ﻿@using PagedList.Mvc;
 @model PagedList.IPagedList<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
-
-@foreach (var item in Model)
-{
-    <div class="message-block">
-        <div>@item.Text</div>
-        <div>@item.Author</div>
-        <div>@item.DateOfCreate</div>
-    </div>
+@{
+    ViewBag.Title = "Messages";
+    Layout = null;
 }
-<br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+@*<h2>@Model.Name</h2>
 
-@Html.PagedListPager(Model, page => Url.Action("Messages",new {chatId=ViewBag.ChatId,page=page }))
-@*@Html.PagedListPager(Model, page => Url.Action("Messages",new {chatId=ViewBag.ChatId,page=page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "messages" })))*@
+    <div>@Model.Author</div>
+    <div>@Model.DateOfCreate</div>*@
+@*<hr>
+    <div id="messages"></div>*@
+<div id="chat-block">
+    <div class="messages">
+        @foreach (var item in Model)
+        {
+            <div class="message-block">
+                <div>@item.Text</div>
+                <div>@item.Author</div>
+                <div>@item.DateOfCreate</div>
+            </div>
+        }
+    </div>
+    @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "chat-block" }))
+    {
+        <input type="hidden" id="chat-id" name="chatId" value=@ViewBag.ChatID>
+        <input type="text" id="message" name="message" />
+        <input type="submit" id="add-message" value="Add message" />    }
+
+    <br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Messages", new { chatId = ViewBag.ChatId, page = page }))
+</div>
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-1.7.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Styles.Render("~/Content/Pagestyles/discuss-messages.css")
+    @Styles.Render("~/Content/PagedList.css")
+}
+
+
+
+
+
+
+
+

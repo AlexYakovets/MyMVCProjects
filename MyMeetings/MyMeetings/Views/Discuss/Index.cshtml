@@ -1,8 +1,6 @@
 ﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<MyMeetings.Models.ChatViewModels.ChatMessageModelView>
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@model MyMeetings.Models.ChatViewModels.ChatViewModel
 @{
-    ViewBag.Title = "Publication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<h2>@Model.Name</h2>
@@ -11,36 +9,32 @@
 <div>@Model.DateOfCreate</div>*@
 @*<hr>
 <div id="messages"></div>*@
-<div id="chat-block">
-<div class="messages">
-    @foreach (var item in Model)
-    {
-        <div class="message-block">
-            <div>@item.Text</div>
-            <div>@item.Author</div>
-            <div>@item.DateOfCreate</div>
-        </div> 
-    }
-    </div>
-    @using (Ajax.BeginForm("AddMessage", new AjaxOptions { UpdateTargetId = "messages" }))
-    {
-        <input type="hidden" id="chat-id" name="chatId" value=@ViewBag.ChatID>
-        <input type="text" id="message" name="message" />
-        <input type="submit" id="add-message" value="Add message" />    }
-    <br /> Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { chatId = ViewBag.ChatId, page = page })) 
-</div>
-@section Scripts {
-
-    @Scripts.Render("~/scripts/jquery-1.7.1.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-    @Styles.Render("~/Content/Pagestyles/discuss-messages.css")
-}
-
-
+<div id="results"></div>
+@*@Ajax.BeginForm("FirstPage", new {chatid=Model.Id}, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results" }, new {  @method = "get" })*@
 @*<script type="text/jscript">
         function AddMessage() {
             var data = { chatId: $("#chat-id").val(), message: $("#message").val() };
             $.post("Discuss/Addmessage", data)
         };
     </script>*@
+<script type="text/javascript">
+    var elements = document.getElementsByTagName("footer");
+    for (i = 0; i < elements.length-1; i++) {
+        elements[i].remove();
+    }
+</script>
+<script type="text/javascript">{
+      $(document).ready(function ()
+      url="Discuss/First?"+data.@Model.Id;
+      $('#results').load(url);
+      });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-1.7.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Styles.Render("~/Content/Pagestyles/discuss-messages.css")
+    @Styles.Render("~/Content/PagedList.css")
+}
+
